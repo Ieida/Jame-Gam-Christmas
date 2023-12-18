@@ -6,7 +6,6 @@
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dfvus"]
 length = 1.5
-slide_on_slope = true
 
 [sub_resource type="Environment" id="Environment_7xry2"]
 background_mode = 1
