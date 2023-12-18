@@ -1,5 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cowy8d86acwl3"]
 
+[ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_ol4ak"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i7t6y"]
@@ -13,6 +14,9 @@ sky = SubResource("Sky_aip2d")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_um0av"]
 size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjd1f"]
+albedo_texture = ExtResource("1_ol4ak")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nfgtf"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
@@ -39,11 +43,14 @@ environment = SubResource("Environment_igvmn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_x7sid")]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("PlaneMesh_um0av")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjd1f")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 
@@ -76,3 +83,8 @@ mesh = SubResource("PrismMesh_hvavc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ljss2")
+
+[node name="Player" parent="." instance=ExtResource("1_x7sid")]
+base_speed = 13.0
+acceleration = 0.7
+deceleration = 0.95
