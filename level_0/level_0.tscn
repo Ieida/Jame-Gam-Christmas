@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=14 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_ol4ak"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
@@ -46,6 +46,9 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_x7sid")]
+base_speed = 13.0
+acceleration = 0.7
+deceleration = 0.95
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -83,8 +86,3 @@ mesh = SubResource("PrismMesh_hvavc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ljss2")
-
-[node name="Player" parent="." instance=ExtResource("1_x7sid")]
-base_speed = 13.0
-acceleration = 0.7
-deceleration = 0.95
