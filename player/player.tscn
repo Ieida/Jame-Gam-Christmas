@@ -22,6 +22,7 @@ fog_density = 0.1
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_q2j2o")
+joystick_sensitivity = 80.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
