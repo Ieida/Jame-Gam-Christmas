@@ -3,16 +3,16 @@ extends Node3D
 
 @export_category("Movement")
 @onready var controller := $CharacterBody3D
-@export var gravity:float = 9.8
-@export var base_speed: float = 5
+@export var gravity: float = 9.8 ## The gravity applied over time.
+@export var base_speed: float = 5 ## The max speed.
 var speed: float = 0
-@export_range(0, 1) var acceleration: float = 0.5
-@export_range(0, 1) var deceleration: float = 0.5
+@export_range(0, 1) var acceleration: float = 0.5 ## The percentage of base_speed added over time until base_speed is reached.
+@export_range(0, 1) var deceleration: float = 0.5 ## The percentage of base_speed subtracted over time until zero is reached.
 var input_vector: Vector3 = Vector3.ZERO
 @export_category("Looking")
 @onready var camera := $CharacterBody3D/Camera3D
-@export var sensitivity: float = 0.1
-@export var joystick_sensitivity: float = 0.1
+@export var sensitivity: float = 0.1 ## Mouse sensitivity. Multiplied by the mouse input.
+@export var joystick_sensitivity: float = 0.1 ## Joystick sensitivity. Multiplied by the joystick input and delta.
 var look_input: Vector2 = Vector2.ZERO
 
 
@@ -60,12 +60,10 @@ func move(delta: float):
 	var new_input_vector = (camera.global_basis.x * input_x + camera.global_basis.x.cross(controller.global_basis.y) * input_z).normalized()
 	if new_input_vector: input_vector = new_input_vector
 	
-	# Acceleration.
-	var target_speed = base_speed if new_input_vector else 0
+	# Acceleration and deceleration.
+	var target_speed = base_speed if new_input_vector else 0.0
 	var accel = acceleration if new_input_vector else deceleration
 	speed = move_toward(speed, target_speed, (base_speed * accel) * delta)
-	
-	# Deceleration.
 	
 	var movement = input_vector * speed
 	movement.y = controller.velocity.y
