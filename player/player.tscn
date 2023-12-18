@@ -6,6 +6,7 @@
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dfvus"]
 length = 1.5
+slide_on_slope = true
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_q2j2o")
