@@ -45,7 +45,7 @@ func look(delta: float):
 	var horizontal = -look_input.x * sensitivity
 	var vertical = -look_input.y * sensitivity
 	# Add joystick input.
-	var joystick_input = Input.get_vector("look_right", "look_left", "look_up", "look_down")
+	var joystick_input = Input.get_vector("look_right", "look_left", "look_down", "look_up")
 	horizontal += joystick_input.x * joystick_sensitivity * delta
 	vertical += joystick_input.y * joystick_sensitivity * delta
 	
