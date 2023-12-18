@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4k0ibtmdvgiv"]
+[gd_scene load_steps=6 format=3 uid="uid://rqh4js2ae550"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_q2j2o"]
 
@@ -6,6 +6,7 @@
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dfvus"]
 length = 1.5
+slide_on_slope = true
 
 [sub_resource type="Environment" id="Environment_7xry2"]
 background_mode = 1
