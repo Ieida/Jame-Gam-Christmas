@@ -43,9 +43,12 @@ func _physics_process(delta):
 
 func look(delta: float):
 	var horizontal = -look_input.x * sensitivity
-	horizontal += Input.get_axis("look_right", "look_left") * joystick_sensitivity * delta
 	var vertical = -look_input.y * sensitivity
-	vertical += Input.get_axis("look_up", "look_down") * joystick_sensitivity * delta
+	# Add joystick input.
+	var joystick_input = Input.get_vector("look_right", "look_left", "look_up", "look_down")
+	horizontal += joystick_input.x * joystick_sensitivity * delta
+	vertical += joystick_input.y * joystick_sensitivity * delta
+	
 	look_input = Vector2.ZERO
 	camera.rotate_y(deg_to_rad(horizontal))
 	camera.rotate_object_local(Vector3.RIGHT, deg_to_rad(vertical))
