@@ -3,21 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gabbo6v5adiw"
-path.s3tc="res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.s3tc.ctex"
+path="res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://character_textures/gingerbread_man.png"
-dest_files=["res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.s3tc.ctex"]
+dest_files=["res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=false
+compress/mode=0
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
