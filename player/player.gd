@@ -14,6 +14,8 @@ var input_vector: Vector3 = Vector3.ZERO
 @export var sensitivity: float = 0.1 ## Mouse sensitivity. Multiplied by the mouse input.
 @export var joystick_sensitivity: float = 0.1 ## Joystick sensitivity. Multiplied by the joystick input and delta.
 var look_input: Vector2 = Vector2.ZERO
+@export_category("Weapon")
+@export var weapon: Weapon
 
 
 func _input(event):
@@ -31,6 +33,10 @@ func _process(delta):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	look(delta)
+	
+	# Attack.
+	if Input.is_action_just_pressed("attack"):
+		attack()
 
 
 func _physics_process(delta):
@@ -39,6 +45,10 @@ func _physics_process(delta):
 		controller.velocity.y -= gravity * delta
 	
 	move(delta)
+
+
+func attack():
+	weapon.attack()
 
 
 func look(delta: float):

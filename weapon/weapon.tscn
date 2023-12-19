@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjxuorkctrkwn"]
+
+[ext_resource type="Script" path="res://weapon/weapon.gd" id="1_djkws"]
+[ext_resource type="Script" path="res://damage/damage.gd" id="2_572s0"]
+[ext_resource type="Script" path="res://status_effect/status_effect.gd" id="3_0mjkv"]
+
+[sub_resource type="Resource" id="Resource_27dul"]
+script = ExtResource("3_0mjkv")
+
+[sub_resource type="Resource" id="Resource_ksids"]
+script = ExtResource("2_572s0")
+amount = 0.0
+status_effect = SubResource("Resource_27dul")
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_djkws")
+damage = SubResource("Resource_ksids")
