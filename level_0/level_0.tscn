@@ -1,13 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=7 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
 [ext_resource type="MeshLibrary" uid="uid://cpj5ujw0kdee1" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
-[ext_resource type="PackedScene" uid="uid://erglk82k4yhc" path="res://environment_models/SM_Anvil.glb" id="3_ggvt5"]
-[ext_resource type="PackedScene" uid="uid://b5ssgnjgpy615" path="res://environment_models/SM_Doorway.glb" id="4_f04ft"]
-[ext_resource type="PackedScene" uid="uid://daoijs5fo3wk7" path="res://environment_models/SM_Cabinet.glb" id="5_vyas6"]
-[ext_resource type="PackedScene" uid="uid://dr2gaytcbdnaj" path="res://environment_models/SM_Chair.glb" id="6_s1sk5"]
-[ext_resource type="PackedScene" uid="uid://cgigniy30vcur" path="res://environment_models/SM_Drawers.glb" id="7_w05yh"]
-[ext_resource type="PackedScene" uid="uid://bmyicn4ethupr" path="res://environment_models/SM_Stool.glb" id="8_0sks2"]
+[ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="3_yxmwa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i7t6y"]
 
@@ -55,20 +50,9 @@ text = "Left click or press E or use
 the right trigger to punch."
 font_size = 100
 
-[node name="SM_Anvil2" parent="." instance=ExtResource("3_ggvt5")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -72.4273, 0, 37.5189)
-
-[node name="SM_Doorway2" parent="." instance=ExtResource("4_f04ft")]
-transform = Transform3D(-8.79194e-08, 0, 1, 0, 2.36752, 0, -2.01136, 0, -4.37114e-08, -20, 0, 40)
-
-[node name="SM_Cabinet2" parent="." instance=ExtResource("5_vyas6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 0, 20)
-
-[node name="SM_Chair2" parent="." instance=ExtResource("6_s1sk5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.7711, 9.53674e-07, 44.4622)
-
-[node name="SM_Drawers2" parent="." instance=ExtResource("7_w05yh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2204, 0, 35.828)
-
-[node name="SM_Stool2" parent="." instance=ExtResource("8_0sks2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8349, 0, 48.9347)
+[node name="BufElf" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 1, 38)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("3_yxmwa")
