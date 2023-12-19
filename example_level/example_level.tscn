@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://c08k65hd1mxbv"]
+
+[ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_acpko"]
+[ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="2_vgu2a"]
+[ext_resource type="PackedScene" uid="uid://3anor7mwhsdl" path="res://example_enemy/example_enemy.tscn" id="3_8cbmi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ej8w"]
+
+[sub_resource type="Sky" id="Sky_j3tm3"]
+sky_material = SubResource("ProceduralSkyMaterial_6ej8w")
+
+[sub_resource type="Environment" id="Environment_o852y"]
+background_mode = 2
+sky = SubResource("Sky_j3tm3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iowvg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t4f6k"]
+lightmap_size_hint = Vector2i(102, 102)
+material = SubResource("StandardMaterial3D_iowvg")
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tx8ap"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="ExampleLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o852y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_t4f6k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_tx8ap")
+
+[node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("1_acpko")]
+weapon = NodePath("CharacterBody3D/Camera3D/ExampleWeapon")
+
+[node name="ExampleWeapon" parent="Player/CharacterBody3D/Camera3D" index="0" instance=ExtResource("2_vgu2a")]
+
+[node name="ExampleEnemy" parent="." instance=ExtResource("3_8cbmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4)
+
+[editable path="Player"]

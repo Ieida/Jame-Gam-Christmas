@@ -41,7 +41,6 @@ shape = SubResource("SeparationRayShape3D_dfvus")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 environment = SubResource("Environment_7xry2")
 attributes = SubResource("CameraAttributesPractical_1y8yc")
-fov = 37.8493
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
