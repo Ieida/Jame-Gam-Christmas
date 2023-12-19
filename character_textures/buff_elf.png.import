@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gabbo6v5adiw"
-path="res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.ctex"
+uid="uid://dybhqs4oxlfbc"
+path="res://.godot/imported/buff_elf.png-5961b375d2cc868cc7873bdf9fbf112b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character_textures/gingerbread_man.png"
-dest_files=["res://.godot/imported/gingerbread_man.png-a6f342841b71e8cfe4e0f658b7d8b009.ctex"]
+source_file="res://character_textures/buff_elf.png"
+dest_files=["res://.godot/imported/buff_elf.png-5961b375d2cc868cc7873bdf9fbf112b.ctex"]
 
 [params]
 

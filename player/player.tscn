@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4k0ibtmdvgiv"]
+[gd_scene load_steps=7 format=3 uid="uid://d4k0ibtmdvgiv"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_q2j2o"]
+[ext_resource type="Texture2D" uid="uid://gabbo6v5adiw" path="res://character_textures/gingerbread_man.png" id="2_hipd5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_en7sx"]
 
@@ -26,6 +27,11 @@ joystick_sensitivity = 80.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+pixel_size = 0.0625
+texture_filter = 0
+texture = ExtResource("2_hipd5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

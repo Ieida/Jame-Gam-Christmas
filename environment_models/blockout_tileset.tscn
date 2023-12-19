@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cncej8qf60q1s"]
+
+[ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_k1xxv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2dwv"]
+albedo_texture = ExtResource("1_k1xxv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ra5a"]
+material = SubResource("StandardMaterial3D_x2dwv")
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_bjk5a"]
+map_width = 3
+map_depth = 3
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8avn4"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3b0uq"]
+size = Vector3(2, 2, 2)
+
+[node name="BlockoutTileset" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5ra5a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("HeightMapShape3D_bjk5a")
+
+[node name="Block" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_8avn4")
+skeleton = NodePath("../Ground")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
+shape = SubResource("BoxShape3D_3b0uq")

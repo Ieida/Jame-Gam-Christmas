@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=6 format=3 uid="uid://cowy8d86acwl3"]
 
-[ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_ol4ak"]
-[ext_resource type="PackedScene" uid="uid://rqh4js2ae550" path="res://player/player.tscn" id="1_x7sid"]
+[ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
+[ext_resource type="MeshLibrary" uid="uid://cpj5ujw0kdee1" path="res://environment_models/ground_tileset.tres" id="2_cuoyg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i7t6y"]
 
@@ -11,30 +11,6 @@ sky_material = SubResource("ProceduralSkyMaterial_i7t6y")
 [sub_resource type="Environment" id="Environment_igvmn"]
 background_mode = 2
 sky = SubResource("Sky_aip2d")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_um0av"]
-size = Vector2(20, 20)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjd1f"]
-albedo_texture = ExtResource("1_ol4ak")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nfgtf"]
-data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6giv3"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wbalu"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nknhi"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="PrismMesh" id="PrismMesh_hvavc"]
-left_to_right = 0.0
-size = Vector3(3, 3, 3)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ljss2"]
-data = PackedVector3Array(-1.5, 1.5, 1, 1.5, -1.5, 1, -1.5, -1.5, 1, -1.5, 1.5, -1, -1.5, -1.5, -1, 1.5, -1.5, -1, -1.5, 1.5, 1, -1.5, 1.5, -1, 1.5, -1.5, 1, -1.5, 1.5, -1, 1.5, -1.5, -1, 1.5, -1.5, 1, -1.5, 1.5, -1, -1.5, 1.5, 1, -1.5, -1.5, -1, -1.5, 1.5, 1, -1.5, -1.5, 1, -1.5, -1.5, -1, -1.5, -1.5, 1, 1.5, -1.5, 1, -1.5, -1.5, -1, 1.5, -1.5, 1, 1.5, -1.5, -1, -1.5, -1.5, -1)
 
 [node name="Level0" type="Node3D"]
 
@@ -50,39 +26,14 @@ base_speed = 13.0
 acceleration = 0.7
 deceleration = 0.95
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-mesh = SubResource("PlaneMesh_um0av")
-surface_material_override/0 = SubResource("StandardMaterial3D_jjd1f")
+[node name="Floor" type="GridMap" parent="."]
+mesh_library = ExtResource("2_cuoyg")
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65534, 1, 1441792, 65535, 1, 1441792, 0, 1, 1441792, 0, 0, 1441792, 65535, 0, 1441792, 65534, 0, 1441792, 65534, 65535, 1441792, 65535, 65535, 1441792, 0, 65535, 1441792, 1, 65535, 1441792, 1, 0, 1441792, 1, 65534, 1441792, 0, 65534, 1441792, 65535, 65534, 1441792, 65534, 65534, 1441792, 1, 1, 1441792, 2, 65532, 1441792, 1, 65532, 1441792, 0, 65532, 1441792, 65535, 65532, 1441792, 65534, 65532, 1441792, 65533, 65532, 1441792, 65532, 65532, 1441792, 65532, 65533, 1441792, 65532, 65534, 1441792, 65532, 65535, 1441792, 65533, 65535, 1441792, 65533, 0, 1441792, 65533, 1, 1441792, 65532, 0, 1441792, 65532, 1, 1441792, 65532, 2, 1441792, 65533, 2, 1441792, 65534, 2, 1441792, 65535, 2, 1441792, 0, 2, 1441792, 1, 2, 1441792, 2, 2, 1441792, 3, 2, 1441792, 3, 1, 1441792, 3, 0, 1441792, 3, 65535, 1441792, 3, 65534, 1441792, 3, 65533, 1441792, 3, 65532, 1441792, 2, 65533, 1441792, 2, 65534, 1441792, 2, 65535, 1441792, 2, 0, 1441792, 2, 1, 1441792, 1, 65533, 1441792, 0, 65533, 1441792, 65535, 65533, 1441792, 65534, 65533, 1441792, 65533, 65533, 1441792, 65533, 65534, 1441792, 3, 3, 1441792, 2, 3, 1441792, 1, 3, 1441792, 0, 3, 1441792, 65535, 3, 1441792, 65534, 3, 1441792, 65533, 3, 1441792, 65532, 3, 1441792)
+}
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_nfgtf")
-
-[node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-mesh = SubResource("BoxMesh_6giv3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_wbalu")
-
-[node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5, 1.5, 0)
-mesh = SubResource("BoxMesh_6giv3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_nknhi")
-
-[node name="Ramp" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 0)
-mesh = SubResource("PrismMesh_hvavc")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ramp"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ljss2")
+[node name="LookInstruction" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 4.18346, -12)
+text = "Use the mouse to look around"
+font_size = 100
