@@ -40,11 +40,13 @@ mesh = SubResource("PlaneMesh_t4f6k")
 shape = SubResource("ConcavePolygonShape3D_tx8ap")
 
 [node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("1_acpko")]
+gravity = null
+sensitivity = null
 weapon = NodePath("CharacterBody3D/Camera3D/ExampleWeapon")
 
 [node name="ExampleWeapon" parent="Player/CharacterBody3D/Camera3D" index="0" instance=ExtResource("2_vgu2a")]
 
 [node name="ExampleEnemy" parent="." instance=ExtResource("3_8cbmi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [editable path="Player"]

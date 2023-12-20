@@ -22,9 +22,11 @@ fog_density = 0.1
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_q2j2o")
+gravity = null
 base_speed = 13.0
 acceleration = 0.7
 deceleration = 0.95
+sensitivity = null
 joystick_sensitivity = 80.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
