@@ -96,6 +96,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_3uayf"]
 resource_name = "swing"
 length = 0.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -139,7 +140,7 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.05, 0.1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -173,7 +174,7 @@ texture = ExtResource("4_awad5")
 libraries = {
 "": SubResource("AnimationLibrary_euolw")
 }
-autoplay = "idle"
+autoplay = "swing"
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
