@@ -28,5 +28,9 @@ func died():
 	queue_free()
 
 
+var has_example_status = false
 func example_status():
+	if has_example_status: return
+	has_example_status = true
+	
 	animation_player.queue("freeze")
