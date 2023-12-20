@@ -47,8 +47,8 @@ func _on_resume_pressed():
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_q2j2o")
-base_speed = 13.0
-acceleration = 0.7
+base_speed = 7.0
+acceleration = 1.0
 deceleration = 0.95
 joystick_sensitivity = 80.0
 health = SubResource("Resource_yl3vr")
