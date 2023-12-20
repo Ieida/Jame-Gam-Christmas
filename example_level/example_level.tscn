@@ -74,5 +74,8 @@ damage = SubResource("Resource_vy0ot")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 health = SubResource("Resource_31xhp")
 
+[node name="SnowParticles" parent="ExampleEnemy" index="2"]
+visible = false
+
 [editable path="Player"]
 [editable path="ExampleEnemy"]

@@ -1,29 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://3anor7mwhsdl"]
+[gd_scene load_steps=21 format=3 uid="uid://3anor7mwhsdl"]
 
 [ext_resource type="Script" path="res://example_enemy/example_enemy.gd" id="1_lckrf"]
 [ext_resource type="Script" path="res://health/health.gd" id="2_vi41t"]
 [ext_resource type="Texture2D" uid="uid://bst1d8qo1xuq6" path="res://character_textures/dummy.png" id="3_jscxb"]
 [ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="4_3msmy"]
+[ext_resource type="Material" uid="uid://7w83g2uy6ptm" path="res://particle_effects/hit_particle_material.tres" id="4_ho5sy"]
 [ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="4_psugf"]
+[ext_resource type="Texture2D" uid="uid://goo8w71s4i1i" path="res://particle_effects/snowflake_texture.png" id="5_yi5x1"]
+[ext_resource type="Material" uid="uid://dowy0uqpw1ukg" path="res://particle_effects/snow_particle_material.tres" id="6_mw8fm"]
+[ext_resource type="Texture2D" uid="uid://cbg2pg3j7rcud" path="res://status_effect/cold_effect.png" id="8_glba1"]
 
 [sub_resource type="Resource" id="Resource_ytx7d"]
 resource_local_to_scene = true
 script = ExtResource("2_vi41t")
 is_infinite = true
 amount = 10.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iwhhg"]
-emission_shape = 1
-emission_sphere_radius = 0.2
-angle_min = 1.0
-angle_max = 360.0
-spread = 180.0
-initial_velocity_min = 3.0
-initial_velocity_max = 5.0
-gravity = Vector3(0, -14, 0)
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3y0vh"]
 transparency = 1
@@ -36,6 +27,19 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_u7ksn"]
 material = SubResource("StandardMaterial3D_3y0vh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxqcu"]
+transparency = 1
+albedo_texture = ExtResource("5_yi5x1")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_cpdjj"]
+material = SubResource("StandardMaterial3D_vxqcu")
 
 [sub_resource type="Animation" id="Animation_v8m50"]
 length = 0.001
@@ -74,6 +78,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SnowParticles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColdText:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_fsrht"]
@@ -123,7 +151,7 @@ resource_name = "freeze"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Sprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -132,6 +160,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.248993, 0.498734, 0.498737, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SnowParticles:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColdText:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_pwpb7"]
@@ -230,11 +282,27 @@ amount = 20
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_iwhhg")
+process_material = ExtResource("4_ho5sy")
 draw_pass_1 = SubResource("QuadMesh_u7ksn")
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+cast_shadow = 0
+gi_mode = 0
+amount = 50
+lifetime = 10.0
+process_material = ExtResource("6_mw8fm")
+draw_pass_1 = SubResource("QuadMesh_cpdjj")
+
+[node name="ColdText" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sorting_offset = 1.0
+modulate = Color(1, 1, 1, 0)
+pixel_size = 0.0625
+billboard = 2
+texture_filter = 0
+texture = ExtResource("8_glba1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
