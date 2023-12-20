@@ -9,6 +9,7 @@ func _ready():
 	health.applied_damage.connect(_on_health_applied_damage)
 	health.recieved_status.connect(_on_status_recieved)
 	health.reached_zero.connect(_on_health_reached_zero)
+	$Hitbox.health = health
 
 
 func _on_health_applied_damage():

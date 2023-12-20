@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="4_psugf"]
 
 [sub_resource type="Resource" id="Resource_ytx7d"]
+resource_local_to_scene = true
 script = ExtResource("2_vi41t")
 is_infinite = true
 amount = 10.0
@@ -239,7 +240,6 @@ libraries = {
 
 [node name="Hitbox" parent="." instance=ExtResource("4_3msmy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-health = SubResource("Resource_ytx7d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("SphereShape3D_wxety")

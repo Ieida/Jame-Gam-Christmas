@@ -14,6 +14,8 @@ var input_vector: Vector3 = Vector3.ZERO
 @export var sensitivity: float = 0.1 ## Mouse sensitivity. Multiplied by the mouse input.
 @export var joystick_sensitivity: float = 0.1 ## Joystick sensitivity. Multiplied by the joystick input and delta.
 var look_input: Vector2 = Vector2.ZERO
+@export_category("Stats")
+@export var health: Health
 @export_category("Weapon")
 @export var weapon: Weapon
 
@@ -24,13 +26,19 @@ func _input(event):
 
 
 func _ready():
+	# Capture mouse.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	# Set up health.
+	$CharacterBody3D/Hitbox.health = health
 
 
 func _process(delta):
-	# Mouse mode
+	# Pause
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = true
+		$PauseMenu.show()
 		
 	look(delta)
 	

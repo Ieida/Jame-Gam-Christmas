@@ -2,5 +2,5 @@ extends Resource
 class_name StatusEffect
 
 
-func apply(to: Node):
+func apply(_to: Node):
 	pass

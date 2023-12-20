@@ -10,7 +10,7 @@ func attack():
 	if is_swinging: return
 	is_swinging = true
 	
-	animation_player.queue("swing")
+	animation_player.play("swing")
 
 
 func swing_damage():
@@ -21,3 +21,4 @@ func swing_damage():
 
 func swing_end():
 	is_swinging = false
+	animation_player.queue("idle")
