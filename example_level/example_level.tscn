@@ -40,8 +40,6 @@ mesh = SubResource("PlaneMesh_t4f6k")
 shape = SubResource("ConcavePolygonShape3D_tx8ap")
 
 [node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("1_acpko")]
-gravity = null
-sensitivity = null
 weapon = NodePath("CharacterBody3D/Camera3D/ExampleWeapon")
 
 [node name="ExampleWeapon" parent="Player/CharacterBody3D/Camera3D" index="0" instance=ExtResource("2_vgu2a")]
