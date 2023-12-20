@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://example_enemy/example_enemy.gd" id="1_lckrf"]
 [ext_resource type="Script" path="res://health/health.gd" id="2_vi41t"]
-[ext_resource type="Texture2D" uid="uid://bst1d8qo1xuq6" path="res://character_textures/dummy.png" id="3_jscxb"]
+[ext_resource type="Texture2D" path="res://character_textures/dummy.png" id="3_jscxb"]
 [ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="4_3msmy"]
 [ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="4_psugf"]
 
