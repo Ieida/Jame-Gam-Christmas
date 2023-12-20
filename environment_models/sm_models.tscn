@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkoo538f0j7ws"]
+
+[ext_resource type="PackedScene" uid="uid://b01ldn3x6sdrq" path="res://environment_models/SM_Assets.glb" id="1_virm7"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SM_Assets" parent="." instance=ExtResource("1_virm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.253448, 0, 0.43477)
