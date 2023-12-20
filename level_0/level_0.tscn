@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=12 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
@@ -16,9 +16,15 @@ sky = SubResource("Sky_aip2d")
 [sub_resource type="PlaneMesh" id="PlaneMesh_iwnqm"]
 size = Vector2(28, 28)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jjrqy"]
+points = PackedVector3Array(-14, 0, -14, -14, 0, 14, 14, 0, -14, 14, 0, 14)
+
 [sub_resource type="BoxMesh" id="BoxMesh_d3tsx"]
 uv2_padding = 1.5
 size = Vector3(2, 48, 14)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tujb5"]
+points = PackedVector3Array(1, 24, 7, -1, 24, 7, 1, -24, 7, 1, 24, -7, -1, 24, -7, -1, -24, 7, 1, -24, -7, -1, -24, -7)
 
 [sub_resource type="Resource" id="Resource_0vsm0"]
 resource_local_to_scene = true
@@ -61,45 +67,100 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 29)
 [node name="Floor" type="MeshInstance3D" parent="Environment/Arena"]
 mesh = SubResource("PlaneMesh_iwnqm")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/Floor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_jjrqy")
+
 [node name="WallFront" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 24, 0)
 mesh = SubResource("BoxMesh_d3tsx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallFront"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallFront/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
 
 [node name="WallFrontLeft" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 24, 10)
 mesh = SubResource("BoxMesh_d3tsx")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallFrontLeft"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallFrontLeft/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
+
 [node name="WallFrontRight" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -10, 24, -10)
 mesh = SubResource("BoxMesh_d3tsx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallFrontRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallFrontRight/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
 
 [node name="WallBack" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 30, 0)
 mesh = SubResource("BoxMesh_d3tsx")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallBack"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallBack/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
+
 [node name="WallBacktLeftA" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 10, 24, 10)
 mesh = SubResource("BoxMesh_d3tsx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallBacktLeftA"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallBacktLeftA/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
 
 [node name="WallBackRightA" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 24, -10)
 mesh = SubResource("BoxMesh_d3tsx")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallBackRightA"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallBackRightA/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
+
 [node name="WallBackLeftB" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 24, 9)
 mesh = SubResource("BoxMesh_d3tsx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallBackLeftB"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallBackLeftB/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
 
 [node name="WallBackRightB" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 24, -7)
 mesh = SubResource("BoxMesh_d3tsx")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallBackRightB"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallBackRightB/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
+
 [node name="WallLeft" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 24, 15)
 mesh = SubResource("BoxMesh_d3tsx")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallLeft"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallLeft/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
+
 [node name="WallRight" type="MeshInstance3D" parent="Environment/Arena"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 24, -15)
 mesh = SubResource("BoxMesh_d3tsx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/WallRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/WallRight/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tujb5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
@@ -110,19 +171,19 @@ light_bake_mode = 0
 health = SubResource("Resource_0vsm0")
 
 [node name="LookInstruction" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 4.18346, -12)
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 4.18346, -6)
 text = "Use the mouse or right joystick
 to look around."
 font_size = 100
 
 [node name="MoveInstruction" type="Label3D" parent="."]
-transform = Transform3D(-1, -2.26267e-08, -8.44439e-08, 0, 0.965926, -0.258819, 8.74228e-08, -0.258819, -0.965926, 0, 4.183, 12)
+transform = Transform3D(-1, -2.26267e-08, -8.44439e-08, 0, 0.965926, -0.258819, 8.74228e-08, -0.258819, -0.965926, 0, 4.183, 7)
 text = "Use WASD or the left joystick
 to move."
 font_size = 100
 
 [node name="PunchInstruction" type="Label3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0.258819, 0.965926, -1.77636e-15, 0.965926, -0.258819, -1, -1.13134e-08, -4.22219e-08, -18, 4.183, 38)
+transform = Transform3D(-4.37114e-08, 0.258819, 0.965926, -1.77636e-15, 0.965926, -0.258819, -1, -1.13134e-08, -4.22219e-08, -10, 4.183, 30)
 text = "Left click or press E or use
 the right trigger to punch."
 font_size = 100
