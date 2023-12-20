@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cncej8qf60q1s"]
+[gd_scene load_steps=8 format=3 uid="uid://cncej8qf60q1s"]
 
 [ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_k1xxv"]
 
@@ -19,9 +19,14 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3b0uq"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="PrismMesh" id="PrismMesh_3bqio"]
+left_to_right = 0.0
+size = Vector3(2, 1, 2)
+
 [node name="BlockoutTileset" type="Node3D"]
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_5ra5a")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
@@ -33,6 +38,7 @@ shape = SubResource("HeightMapShape3D_bjk5a")
 
 [node name="Block" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("BoxMesh_8avn4")
 skeleton = NodePath("../Ground")
 
@@ -40,3 +46,7 @@ skeleton = NodePath("../Ground")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
 shape = SubResource("BoxShape3D_3b0uq")
+
+[node name="Stair" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_3bqio")
