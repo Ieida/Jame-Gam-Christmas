@@ -96,7 +96,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_3uayf"]
 resource_name = "swing"
 length = 0.2
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -174,7 +174,7 @@ texture = ExtResource("4_awad5")
 libraries = {
 "": SubResource("AnimationLibrary_euolw")
 }
-autoplay = "swing"
+autoplay = "idle"
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
