@@ -1,52 +1,80 @@
-[gd_scene load_steps=8 format=3 uid="uid://cncej8qf60q1s"]
+[gd_scene load_steps=13 format=3 uid="uid://cncej8qf60q1s"]
 
-[ext_resource type="Texture2D" uid="uid://cuga2m736fe6y" path="res://icon.svg" id="1_k1xxv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2dwv"]
-albedo_texture = ExtResource("1_k1xxv")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_5ra5a"]
-material = SubResource("StandardMaterial3D_x2dwv")
-
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_bjk5a"]
-map_width = 3
-map_depth = 3
-map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+[ext_resource type="Texture2D" uid="uid://bnfqminaouh2n" path="res://environment_models/Textures/T_BrickWall.tga" id="2_6htva"]
+[ext_resource type="Texture2D" uid="uid://b4tio1snu582w" path="res://environment_models/Textures/T_Floor.tga" id="2_a5ywl"]
+[ext_resource type="Texture2D" uid="uid://dlctfan5bt3t0" path="res://environment_models/Textures/T_TileWall.tga" id="3_irise"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8avn4"]
-size = Vector3(2, 2, 2)
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y16e6"]
+albedo_texture = ExtResource("2_a5ywl")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.25, 0.5)
+uv1_triplanar = true
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3b0uq"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qppt"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eex74"]
+albedo_texture = ExtResource("2_6htva")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28xa3"]
 size = Vector3(2, 2, 2)
 
 [sub_resource type="PrismMesh" id="PrismMesh_3bqio"]
 left_to_right = 0.0
 size = Vector3(2, 1, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnb6t"]
+albedo_texture = ExtResource("3_irise")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.25, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ndbdj"]
+points = PackedVector3Array(-1, -0.5, -1, -1, 0.5, -1, 1, -0.5, -1, -1, -0.5, 1, -1, 0.5, 1, 1, -0.5, 1)
+
 [node name="BlockoutTileset" type="Node3D"]
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visible = false
-mesh = SubResource("PlaneMesh_5ra5a")
+mesh = SubResource("BoxMesh_8avn4")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_y16e6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("HeightMapShape3D_bjk5a")
+shape = SubResource("BoxShape3D_3b0uq")
 
 [node name="Block" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("BoxMesh_8avn4")
-skeleton = NodePath("../Ground")
+mesh = SubResource("BoxMesh_7qppt")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_eex74")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Block"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
-shape = SubResource("BoxShape3D_3b0uq")
+shape = SubResource("BoxShape3D_28xa3")
 
 [node name="Stair" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("PrismMesh_3bqio")
+surface_material_override/0 = SubResource("StandardMaterial3D_wnb6t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stair"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stair/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ndbdj")

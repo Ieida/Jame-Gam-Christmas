@@ -74,6 +74,7 @@ shape = SubResource("SeparationRayShape3D_dfvus")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 environment = SubResource("Environment_7xry2")
 attributes = SubResource("CameraAttributesPractical_1y8yc")
+size = 10.0
 
 [node name="Hitbox" parent="CharacterBody3D" instance=ExtResource("4_c7lv0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
