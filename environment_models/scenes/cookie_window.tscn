@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://prmixilaxtni"]
+
+[ext_resource type="PackedScene" uid="uid://clqybp3vjjhgg" path="res://environment_models/assets/SM_CookieWindow.glb" id="1_m0kd1"]
+
+[node name="CookieWindow" type="Node3D"]
+
+[node name="SM_CookieWindow2" parent="." instance=ExtResource("1_m0kd1")]

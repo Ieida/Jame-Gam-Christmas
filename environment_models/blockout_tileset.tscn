@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cncej8qf60q1s"]
 
-[ext_resource type="Texture2D" uid="uid://bnfqminaouh2n" path="res://environment_models/Textures/T_BrickWall.tga" id="2_6htva"]
-[ext_resource type="Texture2D" uid="uid://b4tio1snu582w" path="res://environment_models/Textures/T_Floor.tga" id="2_a5ywl"]
-[ext_resource type="Texture2D" uid="uid://dlctfan5bt3t0" path="res://environment_models/Textures/T_TileWall.tga" id="3_irise"]
+[ext_resource type="Texture2D" uid="uid://cokbcykit3kg8" path="res://environment_models/Textures/T_BrickWall.tga" id="2_6htva"]
+[ext_resource type="Texture2D" uid="uid://c87anr41xsmyh" path="res://environment_models/Textures/T_Floor.tga" id="2_a5ywl"]
+[ext_resource type="Texture2D" uid="uid://wqs7j3nar0es" path="res://environment_models/Textures/T_TileWall.tga" id="3_irise"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8avn4"]
 size = Vector3(2, 1, 2)
@@ -59,6 +59,7 @@ shape = SubResource("BoxShape3D_3b0uq")
 
 [node name="Block" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("BoxMesh_7qppt")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_eex74")

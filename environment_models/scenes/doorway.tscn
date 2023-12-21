@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2v1bhqwxlyfu"]
+
+[ext_resource type="PackedScene" uid="uid://jbvjvrtoew7w" path="res://environment_models/assets/SM_Doorway.glb" id="1_dyp8a"]
+
+[node name="Doorway" type="Node3D"]
+
+[node name="SM_Doorway2" parent="." instance=ExtResource("1_dyp8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)

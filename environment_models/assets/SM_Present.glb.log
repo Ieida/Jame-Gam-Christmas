@@ -42,7 +42,7 @@
 				<strData>0.00</strData>
 			</item>
 			<item>
-				<strData>1</strData>
+				<strData>0</strData>
 			</item>
 		</v2>
 	</WorkdataEvent>
@@ -113,63 +113,6 @@
 	</ObjectProcessEvent>
 	<message>
 		<strData>got document version: 1.38, upgrading to 1.38...</strData>
-	</message>
-</e>
-<e class_id_reference="10">
-	<ObjectProcessEvent>
-		<Event></Event>
-		<m_role>3</m_role>
-		<m_eventSeverity>2</m_eventSeverity>
-		<m_objectId>
-			<strData></strData>
-		</m_objectId>
-		<m_startTime>
-			<timestamp></timestamp>
-		</m_startTime>
-		<m_endTime>
-			<timestamp></timestamp>
-		</m_endTime>
-	</ObjectProcessEvent>
-	<message>
-		<strData>Warning: Invalid shader node:normal</strData>
-	</message>
-</e>
-<e class_id_reference="10">
-	<ObjectProcessEvent>
-		<Event></Event>
-		<m_role>3</m_role>
-		<m_eventSeverity>2</m_eventSeverity>
-		<m_objectId>
-			<strData></strData>
-		</m_objectId>
-		<m_startTime>
-			<timestamp></timestamp>
-		</m_startTime>
-		<m_endTime>
-			<timestamp></timestamp>
-		</m_endTime>
-	</ObjectProcessEvent>
-	<message>
-		<strData>Warning: Invalid shader node:opacity</strData>
-	</message>
-</e>
-<e class_id_reference="10">
-	<ObjectProcessEvent>
-		<Event></Event>
-		<m_role>3</m_role>
-		<m_eventSeverity>2</m_eventSeverity>
-		<m_objectId>
-			<strData></strData>
-		</m_objectId>
-		<m_startTime>
-			<timestamp></timestamp>
-		</m_startTime>
-		<m_endTime>
-			<timestamp></timestamp>
-		</m_endTime>
-	</ObjectProcessEvent>
-	<message>
-		<strData>Warning: Invalid shader node:sheen</strData>
 	</message>
 </e>
 <e class_id_reference="2">
@@ -516,10 +459,10 @@
 				<strData>false</strData>
 			</item>
 			<item>
-				<strData>0.06</strData>
+				<strData>0.02</strData>
 			</item>
 			<item>
-				<strData>6</strData>
+				<strData>3</strData>
 			</item>
 		</v2>
 	</WorkdataEvent>

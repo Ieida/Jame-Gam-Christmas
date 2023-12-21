@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://j3dihbo04ugd"]
+
+[ext_resource type="PackedScene" uid="uid://cxb5xtthobr1l" path="res://environment_models/assets/SM_Pillar.glb" id="1_yl4oc"]
+
+[node name="Pillar" type="Node3D"]
+
+[node name="SM_Pillar2" parent="." instance=ExtResource("1_yl4oc")]

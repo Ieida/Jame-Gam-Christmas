@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://boi8ubyr5ui3h"]
+
+[ext_resource type="PackedScene" uid="uid://c7740cgdmmuqm" path="res://environment_models/assets/SM_Cabinet.glb" id="1_oqp13"]
+
+[node name="Cabinet" type="Node3D"]
+
+[node name="SM_Cabinet2" parent="." instance=ExtResource("1_oqp13")]

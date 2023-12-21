@@ -1,19 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjrmhuera1k3r"]
+[gd_scene load_steps=5 format=3 uid="uid://cjrmhuera1k3r"]
 
-[ext_resource type="PackedScene" uid="uid://ba4ttlb1ukwur" path="res://environment_models/assets/SM_Wall.glb" id="1_m7wai"]
-[ext_resource type="Texture2D" uid="uid://bnfqminaouh2n" path="res://environment_models/Textures/T_BrickWall.tga" id="2_xcon5"]
+[ext_resource type="PackedScene" uid="uid://bnoopgx25aoq" path="res://environment_models/assets/SM_Wall.glb" id="1_m7wai"]
+[ext_resource type="Texture2D" uid="uid://wqs7j3nar0es" path="res://environment_models/Textures/T_TileWall.tga" id="2_18s3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkghn"]
-albedo_texture = ExtResource("2_xcon5")
+albedo_texture = ExtResource("2_18s3k")
+uv1_world_triplanar = true
 texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uiigg"]
+points = PackedVector3Array(2799.73, -187.5, 9600, 2799.73, -200, 9600, 2799.73, -187.5, 0, 0, -187.501, 9600, 0, -200, 9600, 2799.73, -200, 0, 0, -187.501, 0, 0, -200, 0)
 
 [node name="Wall" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="SM_Wall2" parent="." instance=ExtResource("1_m7wai")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3.0598e-07)
 
 [node name="SM_Wall" parent="SM_Wall2/Node" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_pkghn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.005, 0, 0, 0, 0, 0.005, 0, -0.005, 0, -7, 0, -1)
+shape = SubResource("ConvexPolygonShape3D_uiigg")
 
 [editable path="SM_Wall2"]

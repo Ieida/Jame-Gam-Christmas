@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbpcpd07hq37g"]
+
+[ext_resource type="PackedScene" uid="uid://cnpsj274tr5cy" path="res://environment_models/assets/SM_StorageUnit.glb" id="1_8tog8"]
+
+[node name="StorageUnit" type="Node3D"]
+
+[node name="SM_StorageUnit2" parent="." instance=ExtResource("1_8tog8")]

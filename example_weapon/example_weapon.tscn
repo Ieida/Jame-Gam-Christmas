@@ -166,6 +166,7 @@ damage = SubResource("Resource_fk3dt")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.11, -0.13)
+sorting_offset = 2.0
 no_depth_test = true
 texture_filter = 0
 texture = ExtResource("4_awad5")

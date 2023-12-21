@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://sonvitrt5fk"]
+
+[ext_resource type="PackedScene" uid="uid://clh3sbw12l1i6" path="res://environment_models/assets/SM_RandomPlank.glb" id="1_icya5"]
+
+[node name="Plank" type="Node3D"]
+
+[node name="SM_RandomPlank2" parent="." instance=ExtResource("1_icya5")]

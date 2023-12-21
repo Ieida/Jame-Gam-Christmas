@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bury0yctwewsf"]
+
+[ext_resource type="PackedScene" uid="uid://dudbhhxx28o78" path="res://environment_models/assets/SM_Crate.glb" id="1_yopmq"]
+
+[node name="Crate" type="Node3D"]
+
+[node name="SM_Crate2" parent="." instance=ExtResource("1_yopmq")]

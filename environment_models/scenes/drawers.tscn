@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://w0bkxwswvies"]
+
+[ext_resource type="PackedScene" uid="uid://cvdngn8l3yfq8" path="res://environment_models/assets/SM_Drawers.glb" id="1_pa3nt"]
+
+[node name="Drawers" type="Node3D"]
+
+[node name="SM_Drawers2" parent="." instance=ExtResource("1_pa3nt")]

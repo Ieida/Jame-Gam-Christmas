@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt0o7eo5o207d"]
+
+[ext_resource type="PackedScene" uid="uid://bh8d5bpw5fyt7" path="res://environment_models/assets/SM_Stool.glb" id="1_krvo4"]
+
+[node name="Stool" type="Node3D"]
+
+[node name="SM_Stool2" parent="." instance=ExtResource("1_krvo4")]
