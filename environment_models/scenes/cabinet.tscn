@@ -5,3 +5,4 @@
 [node name="Cabinet" type="Node3D"]
 
 [node name="SM_Cabinet2" parent="." instance=ExtResource("1_oqp13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
