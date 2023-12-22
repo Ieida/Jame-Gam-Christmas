@@ -1,6 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://1vptvrgjs5u0"]
+[gd_scene load_steps=8 format=3 uid="uid://1vptvrgjs5u0"]
 
 [ext_resource type="PackedScene" uid="uid://dev1v3ajn32l3" path="res://environment_models/assets/SM_CeilingLamp.glb" id="1_ju54d"]
+[ext_resource type="Texture2D" uid="uid://bde05f0gxk0nw" path="res://environment_models/textures/T_Chairs.tga" id="2_fgbe4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oglw1"]
+albedo_texture = ExtResource("2_fgbe4")
+texture_filter = 0
 
 [sub_resource type="SphereMesh" id="SphereMesh_sjn3n"]
 
@@ -24,6 +29,9 @@ metadata/_snap_enabled = true
 [node name="SM_CeilingLamp2" parent="." instance=ExtResource("1_ju54d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 
+[node name="SM_CeilingLamp" parent="SM_CeilingLamp2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oglw1")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
 light_energy = 16.0
@@ -39,3 +47,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7b8ue")
 transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
 billboard = 1
 texture = SubResource("GradientTexture2D_gyc8q")
+
+[editable path="SM_CeilingLamp2"]

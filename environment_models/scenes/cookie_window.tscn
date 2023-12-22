@@ -1,7 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://prmixilaxtni"]
+[gd_scene load_steps=4 format=3 uid="uid://prmixilaxtni"]
 
 [ext_resource type="PackedScene" uid="uid://clqybp3vjjhgg" path="res://environment_models/assets/SM_CookieWindow.glb" id="1_m0kd1"]
+[ext_resource type="Texture2D" uid="uid://d02e0ockpa24l" path="res://environment_models/assets/SM_CookieWindow_M_TileWallbasecolortexture.png" id="2_1qrv2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0r4ll"]
+albedo_texture = ExtResource("2_1qrv2")
+texture_filter = 0
 
 [node name="CookieWindow" type="Node3D"]
 
 [node name="SM_CookieWindow2" parent="." instance=ExtResource("1_m0kd1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="SM_CookieWindow" parent="SM_CookieWindow2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0r4ll")
+
+[editable path="SM_CookieWindow2"]

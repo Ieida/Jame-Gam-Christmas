@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://diquelqxxxwju"]
+[gd_scene load_steps=4 format=3 uid="uid://diquelqxxxwju"]
 
 [ext_resource type="PackedScene" uid="uid://28edsn4vich3" path="res://environment_models/assets/SM_Anvil.glb" id="1_u0tx3"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xmpa6"]
+load_path = "res://.godot/imported/T_Anvil.tga-e0e1fc951beff8ee8c80b6c5b8b33cc9.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tadj1"]
+albedo_texture = SubResource("CompressedTexture2D_xmpa6")
+texture_filter = 0
+
 [node name="Anvil" type="Node3D"]
 
-[node name="SM_Anvil2" parent="." instance=ExtResource("1_u0tx3")]
+[node name="SM_Anvil3" parent="." instance=ExtResource("1_u0tx3")]
+
+[node name="SM_Anvil" parent="SM_Anvil3/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_tadj1")
+
+[editable path="SM_Anvil3"]

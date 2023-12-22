@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cncej8qf60q1s"]
 
-[ext_resource type="Texture2D" uid="uid://cokbcykit3kg8" path="res://environment_models/Textures/T_BrickWall.tga" id="2_6htva"]
-[ext_resource type="Texture2D" uid="uid://c87anr41xsmyh" path="res://environment_models/Textures/T_Floor.tga" id="2_a5ywl"]
-[ext_resource type="Texture2D" uid="uid://wqs7j3nar0es" path="res://environment_models/Textures/T_TileWall.tga" id="3_irise"]
+[ext_resource type="Texture2D" uid="uid://bpl2uakd6b6an" path="res://environment_models/textures/T_BrickWall.tga" id="2_6htva"]
+[ext_resource type="Texture2D" uid="uid://uu20plq2rp1c" path="res://environment_models/textures/T_Floor.tga" id="2_a5ywl"]
+[ext_resource type="Texture2D" uid="uid://dow82cogfw4lv" path="res://environment_models/textures/T_TileWall.tga" id="3_irise"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8avn4"]
 size = Vector3(2, 1, 2)

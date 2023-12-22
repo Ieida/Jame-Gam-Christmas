@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bde05f0gxk0nw"
-path="res://.godot/imported/T_Chairs.tga-786fd224ac02d91263f93a8fd8ddf58f.ctex"
+path="res://.godot/imported/T_Chairs.tga-5ceb80c2625a0410aec1f0b8ebfd554a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment_models/Textures/T_Chairs.tga"
-dest_files=["res://.godot/imported/T_Chairs.tga-786fd224ac02d91263f93a8fd8ddf58f.ctex"]
+source_file="res://environment_models/textures/T_Chairs.tga"
+dest_files=["res://.godot/imported/T_Chairs.tga-5ceb80c2625a0410aec1f0b8ebfd554a.ctex"]
 
 [params]
 

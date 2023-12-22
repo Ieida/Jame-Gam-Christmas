@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbpcpd07hq37g"]
+[gd_scene load_steps=5 format=3 uid="uid://dbpcpd07hq37g"]
 
 [ext_resource type="PackedScene" uid="uid://cnpsj274tr5cy" path="res://environment_models/assets/SM_StorageUnit.glb" id="1_8tog8"]
+[ext_resource type="Texture2D" uid="uid://barm4h7pc5ys1" path="res://environment_models/textures/T_Wood.tga" id="2_4rvc7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubdyb"]
+albedo_texture = ExtResource("2_4rvc7")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bb5xp"]
+size = Vector3(1.5, 1, 2)
 
 [node name="StorageUnit" type="Node3D"]
 
 [node name="SM_StorageUnit2" parent="." instance=ExtResource("1_8tog8")]
+
+[node name="SM_StorageUnit" parent="SM_StorageUnit2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ubdyb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_bb5xp")
+
+[editable path="SM_StorageUnit2"]
