@@ -19,9 +19,10 @@ points = PackedVector3Array(2799.73, -187.5, 9600, 2799.73, -200, 9600, 2799.73,
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="SM_Wall2" parent="." instance=ExtResource("1_m7wai")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3.0598e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75, 0, 0)
 
 [node name="SM_Wall" parent="SM_Wall2/Node" index="0"]
+transform = Transform3D(-0.01, -8.74228e-10, 0, 8.74228e-10, -0.01, 0, 0, 0, 0.01, 38, -4, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_sl3bj")
 surface_material_override/1 = SubResource("StandardMaterial3D_dq0sn")
 

@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc36hhrbxo2gp"
-path="res://.godot/imported/SM_Anvil_M_Anvilbasecolortexture.png-da062abb43c10df99a169c2946f1844b.ctex"
+uid="uid://bbpn05rbbdjoj"
+path="res://.godot/imported/T_Anvil_Shine.tga-de55942d09418119d83880161a969bbd.ctex"
 metadata={
 "vram_texture": false
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://environment_models/assets/SM_Anvil_M_Anvilbasecolortexture.png"
-dest_files=["res://.godot/imported/SM_Anvil_M_Anvilbasecolortexture.png-da062abb43c10df99a169c2946f1844b.ctex"]
+source_file="res://environment_models/textures/T_Anvil_Shine.tga"
+dest_files=["res://.godot/imported/T_Anvil_Shine.tga-de55942d09418119d83880161a969bbd.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dv75eo6xsu7l1"
-path="res://.godot/imported/SM_Anvil.glb-1c04d94028f9e4d9ba6c88068bbfd7cd.scn"
+uid="uid://ducibe25ahdcx"
+path="res://.godot/imported/SM_SmallPresent.glb-9b9876a14ab34edc287d21c4683b49ac.scn"
 
 [deps]
 
-source_file="res://environment_models/assets/SM_Anvil.glb"
-dest_files=["res://.godot/imported/SM_Anvil.glb-1c04d94028f9e4d9ba6c88068bbfd7cd.scn"]
+source_file="res://environment_models/assets/SM_SmallPresent.glb"
+dest_files=["res://.godot/imported/SM_SmallPresent.glb-9b9876a14ab34edc287d21c4683b49ac.scn"]
 
 [params]
 
