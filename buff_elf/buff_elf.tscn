@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d2n423vwfrk6h" path="res://buff_elf/dying/dying.tscn" id="7_51q8a"]
 [ext_resource type="PackedScene" uid="uid://ethxhwh58alj" path="res://buff_elf/hit/hit.tscn" id="7_k34rf"]
 [ext_resource type="Script" path="res://health/health.gd" id="8_pbpg6"]
-[ext_resource type="PackedScene" uid="uid://dp8vcdaficwbv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
+[ext_resource type="PackedScene" uid="uid://u7b356gbnalv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
 [ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="9_70sf5"]
 [ext_resource type="Script" path="res://buff_elf/charge_recover/charge_recover.gd" id="9_pc16p"]
 [ext_resource type="Script" path="res://damage/damage.gd" id="11_6jyt5"]
