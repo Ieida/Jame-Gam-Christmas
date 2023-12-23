@@ -5,6 +5,15 @@ class_name ExampleWeapon
 @onready var animation_player := $AnimationPlayer
 
 
+func _ready():
+	animation_player.animation_finished.connect(_on_animation_finished)
+
+
+func _on_animation_finished(anim_name: StringName):
+	if anim_name == "swing":
+		is_swinging = false
+
+
 var is_swinging = false
 func attack():
 	if is_swinging: return
@@ -14,9 +23,9 @@ func attack():
 
 
 func swing_damage():
-	for body in $Area3D.get_overlapping_bodies():
-		if body is Hitbox:
-			hit(body)
+	for area in hurtbox.get_overlapping_areas():
+		if area is Hitbox:
+			hit(area)
 
 
 func swing_end():

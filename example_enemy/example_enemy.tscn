@@ -6,15 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="4_3msmy"]
 [ext_resource type="Material" uid="uid://7w83g2uy6ptm" path="res://particle_effects/hit_particle_material.tres" id="4_ho5sy"]
 [ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="4_psugf"]
+[ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="6_tnwmp"]
 [ext_resource type="Texture2D" uid="uid://goo8w71s4i1i" path="res://particle_effects/snowflake_texture.png" id="5_yi5x1"]
 [ext_resource type="Material" uid="uid://dowy0uqpw1ukg" path="res://particle_effects/snow_particle_material.tres" id="6_mw8fm"]
 [ext_resource type="Texture2D" uid="uid://cbg2pg3j7rcud" path="res://status_effect/cold_effect.png" id="8_glba1"]
-
-[sub_resource type="Resource" id="Resource_ytx7d"]
-resource_local_to_scene = true
-script = ExtResource("2_vi41t")
-is_infinite = true
-amount = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3y0vh"]
 transparency = 1
@@ -264,9 +259,9 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_wxety"]
 radius = 1.0
 
-[node name="ExampleEnemy" type="Node3D"]
+[node name="ExampleEnemy" type="Node3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_lckrf")
-health = SubResource("Resource_ytx7d")
+health = NodePath("Health")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -309,8 +304,18 @@ libraries = {
 "": SubResource("AnimationLibrary_uulhu")
 }
 
-[node name="Hitbox" parent="." instance=ExtResource("4_3msmy")]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("health", "status_effect_manager") instance=ExtResource("4_3msmy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+health = NodePath("../Health")
+status_effect_manager = NodePath("../StatusEffectManager")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("SphereShape3D_wxety")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_vi41t")
+is_infinite = true
+
+[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
+script = ExtResource("6_tnwmp")
+reciever = NodePath("..")

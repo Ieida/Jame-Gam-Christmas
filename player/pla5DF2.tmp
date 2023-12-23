@@ -31,30 +31,21 @@ script/source = "extends Control
 
 
 func _ready():
-	$Control.hide()
-	$Control/Resume.pressed.connect(_on_resume_pressed)
-
-
-func _process(delta):
-	if Input.is_action_just_pressed(\"ui_cancel\"):
-		get_tree().paused = true
-		$Control.show()
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	hide()
 
 
 func _on_resume_pressed():
 	get_tree().paused = false
-	$Control.hide()
+	hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 "
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("health") groups=["players"]]
+[node name="Player" type="Node3D" groups=["players"]]
 script = ExtResource("1_q2j2o")
-base_speed = 7.0
-acceleration = 1.0
+base_speed = 13.0
+acceleration = 0.7
 deceleration = 0.95
 joystick_sensitivity = 80.0
-health = NodePath("Health")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 process_mode = 1
@@ -67,7 +58,7 @@ texture_filter = 0
 texture = ExtResource("2_hipd5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_en7sx")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -78,12 +69,9 @@ shape = SubResource("SeparationRayShape3D_dfvus")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 environment = SubResource("Environment_7xry2")
 attributes = SubResource("CameraAttributesPractical_1y8yc")
-size = 10.0
 
-[node name="Hitbox" parent="CharacterBody3D" node_paths=PackedStringArray("health", "status_effect_manager") instance=ExtResource("4_c7lv0")]
+[node name="Hitbox" parent="CharacterBody3D" instance=ExtResource("4_c7lv0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-health = NodePath("../../Health")
-status_effect_manager = NodePath("../../StatusEffectManager")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -105,24 +93,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatusEffectLabel" type="Label" parent="HUD"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "*status effect*"
-
 [node name="PauseMenu" type="Control" parent="."]
-process_mode = 3
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,15 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_0lof4")
 
-[node name="Control" type="Control" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/Control"]
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,7 +112,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Resume" type="Button" parent="PauseMenu/Control"]
+[node name="Resume" type="Button" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -162,3 +126,5 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Resume"
+
+[connection signal="pressed" from="PauseMenu/Resume" to="PauseMenu" method="_on_resume_pressed"]

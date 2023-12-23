@@ -6,33 +6,20 @@ extends Node3D
 
 
 func _ready():
+	# Set up health.
+	$CharacterBody3D/Hitbox.health = health
 	health.applied_damage.connect(_on_health_applied_damage)
 	health.reached_zero.connect(_on_health_reached_zero)
-	$Hitbox.health = health
 
 
 func _on_health_applied_damage():
-	animation_player.queue("hit")
+	animation_player.play("hit")
 
 
 func _on_health_reached_zero():
-	animation_player.queue("crumble")
+	animation_player.play("crumble")
 	$Hitbox.disable()
 
 
 func _on_status_recieved(status: StatusEffect):
 	status.apply(self)
-
-
-func died():
-	queue_free()
-
-
-func freeze():
-	animation_player.queue("freeze")
-	print("freezing")
-
-
-func unfreeze():
-	animation_player.queue("RESET")
-	print("unfreezing")

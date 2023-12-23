@@ -1,0 +1,134 @@
+[gd_scene load_steps=22 format=3 uid="uid://o6jaoucmn5uy"]
+
+[ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="1_c6ls8"]
+[ext_resource type="Script" path="res://buff_elf/buff_elf.gd" id="1_enntc"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_ugok7"]
+[ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="3_uqtox"]
+[ext_resource type="PackedScene" uid="uid://duvpd0ktew0m3" path="res://buff_elf/idle_state/buff_elf_idle_state.tscn" id="4_6uo0i"]
+[ext_resource type="PackedScene" uid="uid://bwjocllrkjgqx" path="res://buff_elf/move_state/buff_elf_move_state.tscn" id="4_frvta"]
+[ext_resource type="PackedScene" uid="uid://cujlvq1qf84da" path="res://buff_elf/charge_state/buff_elf_charge_state.tscn" id="5_fs2u0"]
+[ext_resource type="PackedScene" uid="uid://cmn0kx3l2odfr" path="res://status_effects/stun.tscn" id="6_u4gnr"]
+[ext_resource type="Script" path="res://health/health.gd" id="8_pbpg6"]
+[ext_resource type="PackedScene" uid="uid://dp8vcdaficwbv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
+[ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="9_70sf5"]
+[ext_resource type="Script" path="res://damage/damage.gd" id="11_6jyt5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w0rm2"]
+height = 1.5
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_tgpwm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_do14i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ciy8"]
+
+[sub_resource type="Animation" id="Animation_11vvq"]
+resource_name = "charge"
+
+[sub_resource type="Animation" id="Animation_g3bta"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_i5mvd"]
+resource_name = "move"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bmko"]
+_data = {
+"charge": SubResource("Animation_11vvq"),
+"idle": SubResource("Animation_g3bta"),
+"move": SubResource("Animation_i5mvd")
+}
+
+[sub_resource type="GDScript" id="GDScript_bj7mk"]
+script/source = "extends Node3D
+
+
+@onready var target: Hitbox = get_tree().get_nodes_in_group(\"players\")[0].get_hitbox()
+
+
+func _process(delta):
+	global_transform = target.global_transform
+"
+
+[node name="BuffElf" type="Node3D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_enntc")
+health = NodePath("Health")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("active_state")]
+script = ExtResource("3_ugok7")
+active_state = NodePath("BuffElfIdleState")
+
+[node name="BuffElfIdleState" parent="StateMachine" node_paths=PackedStringArray("raycast", "target", "chase_state") instance=ExtResource("4_6uo0i")]
+raycast = NodePath("../../CharacterBody3D/RayCast3D")
+target = NodePath("../../Target")
+chase_state = NodePath("../BuffElfMoveState")
+
+[node name="BuffElfMoveState" parent="StateMachine" node_paths=PackedStringArray("navigation_agent", "body", "target", "charge_state") instance=ExtResource("4_frvta")]
+navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
+body = NodePath("../../CharacterBody3D")
+target = NodePath("../../Target")
+charge_state = NodePath("../BuffElfChargeState")
+
+[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("navigation_agent", "body", "end_state", "hurtbox", "hitbox", "damage") instance=ExtResource("5_fs2u0")]
+navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
+body = NodePath("../../CharacterBody3D")
+end_state = NodePath("../BuffElfMoveState")
+hurtbox = NodePath("../../CharacterBody3D/Hurtbox")
+hitbox = NodePath("../../CharacterBody3D/Hitbox")
+damage = NodePath("../../Damage")
+status_effect = ExtResource("6_u4gnr")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CapsuleShape3D_w0rm2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+shape = SubResource("SeparationRayShape3D_tgpwm")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+path_height_offset = 0.5
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+transform = Transform3D(6.25, 0, 0, 0, 6.25, 0, 0, 0, 6.25, 0, 1, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_c6ls8")
+
+[node name="Hitbox" parent="CharacterBody3D" node_paths=PackedStringArray("health", "status_effect_manager") instance=ExtResource("3_uqtox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+health = NodePath("../../Health")
+status_effect_manager = NodePath("../../StatusEffectManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hitbox"]
+shape = SubResource("CapsuleShape3D_do14i")
+
+[node name="Hurtbox" parent="CharacterBody3D" instance=ExtResource("8_sluol")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4ciy8")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1bmko")
+}
+
+[node name="Target" type="Node3D" parent="."]
+script = SubResource("GDScript_bj7mk")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("8_pbpg6")
+amount = 100.0
+
+[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
+script = ExtResource("9_70sf5")
+reciever = NodePath("..")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("11_6jyt5")
+amount = 10.0

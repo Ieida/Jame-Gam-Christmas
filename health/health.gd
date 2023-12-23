@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 class_name Health
 
 
@@ -6,13 +6,11 @@ class_name Health
 @export var amount: float = 0
 
 
-signal applied_damage()
-signal recieved_status(status: StatusEffect)
+signal applied_damage
 signal reached_zero
-func apply(damage: Damage):
-	amount -= damage.amount
+func subtract(amt: float):
+	amount -= amt
 	applied_damage.emit()
-	recieved_status.emit(damage.status_effect)
 	if is_infinite: return
 	
 	if amount <= 0:
