@@ -50,8 +50,8 @@ func _on_resume_pressed():
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("health") groups=["players"]]
 script = ExtResource("1_q2j2o")
-base_speed = 13.0
-acceleration = 0.7
+base_speed = 7.0
+acceleration = 1.0
 deceleration = 0.95
 joystick_sensitivity = 80.0
 health = NodePath("Health")
@@ -67,7 +67,7 @@ texture_filter = 0
 texture = ExtResource("2_hipd5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("SphereShape3D_en7sx")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -78,6 +78,7 @@ shape = SubResource("SeparationRayShape3D_dfvus")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 environment = SubResource("Environment_7xry2")
 attributes = SubResource("CameraAttributesPractical_1y8yc")
+size = 10.0
 
 [node name="Hitbox" parent="CharacterBody3D" node_paths=PackedStringArray("health", "status_effect_manager") instance=ExtResource("4_c7lv0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

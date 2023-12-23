@@ -1,0 +1,19 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://dowy0uqpw1ukg"]
+
+[sub_resource type="Curve" id="Curve_6ggnt"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1e-05, 0), 3.04354, 3.04354, 0, 0, Vector2(0.0602837, 0.624277), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bf67t"]
+curve = SubResource("Curve_6ggnt")
+
+[resource]
+emission_shape_scale = Vector3(1, 0, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, -3, 0)
+scale_min = 0.3
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_bf67t")
+turbulence_noise_scale = 1.0
+collision_mode = 2
