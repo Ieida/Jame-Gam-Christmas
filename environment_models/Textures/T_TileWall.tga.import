@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dow82cogfw4lv"
-path="res://.godot/imported/T_TileWall.tga-2a689a951c129dba36243559377f0b26.ctex"
+path="res://.godot/imported/T_TileWall.tga-6f043ab7a0f0d5bfafc813ee2bba4745.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment_models/Textures/T_TileWall.tga"
-dest_files=["res://.godot/imported/T_TileWall.tga-2a689a951c129dba36243559377f0b26.ctex"]
+source_file="res://environment_models/textures/T_TileWall.tga"
+dest_files=["res://.godot/imported/T_TileWall.tga-6f043ab7a0f0d5bfafc813ee2bba4745.ctex"]
 
 [params]
 
