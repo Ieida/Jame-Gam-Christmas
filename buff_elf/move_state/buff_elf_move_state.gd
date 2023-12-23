@@ -39,7 +39,7 @@ func _on_velocity_computed(safe_velocity: Vector3):
 	body.velocity = safe_velocity
 	body.move_and_slide()
 	
-	if navigation_agent.get_next_path_position().distance_to(navigation_agent.get_final_position()) < 1 and body.global_position.distance_to(target.global_position) <= charge_range:
+	if navigation_agent.get_next_path_position().distance_to(navigation_agent.get_final_position()) < 1 and body.global_position.distance_to(target.feet.global_position) <= charge_range:
 		state_machine.change_state(charge_state)
 
 
