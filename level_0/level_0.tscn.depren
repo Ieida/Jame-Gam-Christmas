@@ -1,34 +1,30 @@
-[gd_scene load_steps=27 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=30 format=3 uid="uid://cowy8d86acwl3"]
 
+[ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
+[ext_resource type="Script" path="res://health/health.gd" id="2_dxug1"]
 [ext_resource type="PackedScene" uid="uid://cjrmhuera1k3r" path="res://environment_models/scenes/wall.tscn" id="2_lkmj8"]
+[ext_resource type="PackedScene" uid="uid://3anor7mwhsdl" path="res://example_enemy/example_enemy.tscn" id="2_ry3oo"]
 [ext_resource type="PackedScene" uid="uid://sonvitrt5fk" path="res://environment_models/scenes/plank.tscn" id="4_6vqni"]
 [ext_resource type="PackedScene" uid="uid://cdp3cmqypy06o" path="res://environment_models/scenes/shelves.tscn" id="4_k0fpa"]
 [ext_resource type="PackedScene" uid="uid://mvj31tum2puy" path="res://environment_models/scenes/present.tscn" id="4_libta"]
 [ext_resource type="PackedScene" uid="uid://bt0o7eo5o207d" path="res://environment_models/scenes/stool.tscn" id="4_r2ehu"]
 [ext_resource type="PackedScene" uid="uid://dbpcpd07hq37g" path="res://environment_models/scenes/storage_unit.tscn" id="5_fqqbx"]
+[ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="6_oabfv"]
 [ext_resource type="PackedScene" uid="uid://bury0yctwewsf" path="res://environment_models/scenes/crate.tscn" id="7_hqsyx"]
+[ext_resource type="Script" path="res://damage/damage.gd" id="7_u6r0i"]
+[ext_resource type="Script" path="res://level_0/example_status_effect.gd" id="8_cjorf"]
 [ext_resource type="PackedScene" uid="uid://y4khr4g14j5a" path="res://environment_models/scenes/chair.tscn" id="8_ems1u"]
 [ext_resource type="PackedScene" uid="uid://2v1bhqwxlyfu" path="res://environment_models/scenes/doorway.tscn" id="8_soxg0"]
 [ext_resource type="PackedScene" uid="uid://prmixilaxtni" path="res://environment_models/scenes/cookie_window.tscn" id="12_gsbd7"]
 [ext_resource type="PackedScene" uid="uid://1vptvrgjs5u0" path="res://environment_models/scenes/ceiling_lamp.tscn" id="12_xif0b"]
 [ext_resource type="PackedScene" uid="uid://db5kaqx07of4d" path="res://environment_models/scenes/anvil.tscn" id="14_b2kkf"]
-[ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="14_vk4dc"]
-[ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="15_7etpt"]
-[ext_resource type="PackedScene" uid="uid://o6jaoucmn5uy" path="res://buff_elf/buff_elf.tscn" id="16_4jhrc"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d5dat"]
-
-[sub_resource type="Sky" id="Sky_dg2a0"]
-sky_material = SubResource("ProceduralSkyMaterial_d5dat")
-
-[sub_resource type="Environment" id="Environment_ur6hu"]
-background_mode = 2
-sky = SubResource("Sky_dg2a0")
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_3xe5a"]
-vertices = PackedVector3Array(-43.5, 1.5, 15.5, -43.5, 1.5, 42.5, -16.5, 1.5, 42.5, -16.5, 1.5, 15.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+[sub_resource type="Resource" id="Resource_00acj"]
+resource_local_to_scene = true
+script = ExtResource("2_dxug1")
+is_infinite = true
+amount = 10.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_iwnqm"]
 size = Vector2(28, 28)
@@ -54,14 +50,34 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
+[sub_resource type="Resource" id="Resource_0vsm0"]
+resource_local_to_scene = true
+script = ExtResource("2_dxug1")
+is_infinite = false
+amount = 100.0
+
+[sub_resource type="Resource" id="Resource_s4031"]
+script = ExtResource("8_cjorf")
+
+[sub_resource type="Resource" id="Resource_0djcg"]
+resource_local_to_scene = true
+script = ExtResource("7_u6r0i")
+amount = 1.0
+status_effect = SubResource("Resource_s4031")
+
 [node name="Level0" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_ur6hu")
-
 [node name="Tutorial" type="Node3D" parent="Environment"]
+
+[node name="GridMap" type="GridMap" parent="Environment/Tutorial"]
+mesh_library = ExtResource("2_cuoyg")
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(1, 0, 0, 1, 65535, 0, 0, 65535, 0, 0, 0, 0, 65535, 0, 0, 65535, 65535, 0, 65534, 65535, 0, 65534, 0, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 1, 65534, 0, 0, 65534, 0, 65535, 65534, 0, 65534, 65534, 0, 2, 1, 0, 2, 0, 0, 3, 0, 0, 3, 1, 0, 3, 65535, 0, 2, 65535, 0, 2, 65534, 0, 3, 65534, 0, 65533, 65534, 0, 65532, 65534, 0, 65532, 65535, 0, 65532, 0, 0, 65533, 65535, 0, 65533, 0, 0, 65533, 1, 0, 65532, 1, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 3, 65533, 0, 2, 65533, 0, 1, 65533, 0, 0, 65533, 0, 65535, 65533, 0, 65534, 65533, 0, 65533, 65533, 0, 65532, 65533, 0, 65532, 65532, 0, 65533, 65532, 0, 65534, 65532, 0, 65535, 65532, 0, 0, 65532, 0, 1, 65532, 0, 2, 65532, 0, 3, 65532, 0, 3, 3, 0, 2, 3, 0, 1, 3, 0, 0, 3, 0, 65534, 3, 0, 65533, 3, 0, 65532, 3, 0, 3, 4, 1, 2, 4, 1, 1, 4, 1, 65534, 4, 1, 65533, 4, 1, 65532, 4, 1, 65531, 4, 1, 65531, 3, 1, 65531, 2, 1, 65531, 1, 1, 65531, 65535, 1, 65531, 0, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 65531, 65531, 1, 65532, 65531, 1, 65533, 65531, 1, 65534, 65531, 1, 65535, 65531, 1, 0, 65531, 1, 1, 65531, 1, 2, 65531, 1, 3, 65531, 1, 4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 4, 65534, 1, 4, 65535, 1, 4, 0, 1, 4, 1, 1, 4, 2, 1, 4, 3, 1, 4, 4, 1, 65535, 3, 0, 0, 4, 0, 65535, 4, 0, 65535, 5, 0, 0, 5, 0, 0, 6, 0, 65535, 6, 0, 65535, 7, 0, 0, 7, 0, 0, 8, 0, 65535, 8, 0, 65535, 9, 0, 0, 9, 0, 0, 10, 0, 65535, 10, 0, 65535, 11, 0, 0, 11, 0, 1, 5, 1, 1, 6, 1, 1, 7, 1, 1, 8, 1, 1, 9, 1, 1, 10, 1, 1, 11, 1, 65534, 5, 1, 65534, 6, 1, 65534, 7, 1, 65534, 8, 1, 65534, 9, 1, 65534, 10, 1, 65534, 11, 1, 65536, 65531, 1, 65537, 65531, 1, 65538, 65531, 1, 131071, 65531, 1, 131070, 65531, 1, 131069, 65531, 1, 131068, 65531, 1, 131067, 65531, 1, 131067, 65532, 1, 131067, 65533, 1, 131067, 65534, 1, 131067, 65535, 1, 131067, 0, 1, 131067, 1, 1, 131067, 2, 1, 131067, 3, 1, 131067, 4, 1, 131068, 4, 1, 131069, 4, 1, 131070, 4, 1, 65537, 4, 1, 65538, 4, 1, 65539, 4, 1, 65540, 4, 1, 65540, 3, 1, 65540, 2, 1, 65540, 1, 1, 65540, 0, 1, 65540, 65535, 1, 65540, 65534, 1, 65540, 65533, 1, 65540, 65532, 1, 65540, 65531, 1, 65539, 65531, 1, 131075, 65531, 1, 131074, 65531, 1, 131073, 65531, 1, 131072, 65531, 1, 196607, 65531, 1, 196606, 65531, 1, 196605, 65531, 1, 196604, 65531, 1, 196603, 65531, 1, 196603, 65532, 1, 196603, 65533, 1, 196603, 65534, 1, 196603, 65535, 1, 196603, 0, 1, 196603, 1, 1, 196603, 2, 1, 196603, 3, 1, 196603, 4, 1, 196604, 4, 1, 196605, 4, 1, 196606, 4, 1, 131073, 4, 1, 131074, 4, 1, 131075, 4, 1, 131076, 4, 1, 131076, 3, 1, 131076, 2, 1, 131076, 1, 1, 131076, 0, 1, 131076, 65535, 1, 131076, 65534, 1, 131076, 65533, 1, 131076, 65532, 1, 131076, 65531, 1, 196612, 4, 1, 196611, 4, 1, 196610, 4, 1, 196608, 4, 1, 262143, 4, 1, 262142, 4, 1, 262141, 4, 1, 262140, 4, 1, 262139, 4, 1, 262139, 3, 1, 262139, 2, 1, 262139, 1, 1, 262139, 0, 1, 262139, 65535, 1, 262139, 65534, 1, 262139, 65533, 1, 262139, 65532, 1, 262139, 65531, 1, 262140, 65531, 1, 262141, 65531, 1, 262142, 65531, 1, 262143, 65531, 1, 196608, 65531, 1, 196609, 65531, 1, 196610, 65531, 1, 196611, 65531, 1, 196612, 65531, 1, 196612, 65532, 1, 196612, 65533, 1, 196612, 65534, 1, 196612, 65535, 1, 196612, 0, 1, 196612, 1, 1, 196612, 2, 1, 196612, 3, 1, 196611, 3, 1, 196610, 3, 1, 196609, 3, 1, 196608, 3, 1, 262143, 3, 1, 262142, 3, 1, 262141, 3, 1, 262140, 3, 1, 262140, 2, 1, 262141, 2, 1, 262142, 2, 1, 262143, 2, 1, 196608, 2, 1, 196609, 2, 1, 196610, 2, 1, 196611, 2, 1, 196611, 1, 1, 196610, 1, 1, 196609, 1, 1, 196608, 1, 1, 262143, 1, 1, 262142, 1, 1, 262141, 1, 1, 262140, 0, 1, 262140, 65535, 1, 262141, 65535, 1, 262141, 0, 1, 262140, 1, 1, 262142, 0, 1, 262143, 0, 1, 196608, 0, 1, 196609, 0, 1, 196610, 0, 1, 196611, 0, 1, 196611, 65535, 1, 196610, 65535, 1, 196609, 65535, 1, 196608, 65535, 1, 262143, 65535, 1, 262142, 65535, 1, 262141, 65534, 1, 262141, 65533, 1, 262140, 65533, 1, 262140, 65534, 1, 262140, 65532, 1, 262141, 65532, 1, 262142, 65532, 1, 262143, 65532, 1, 196608, 65532, 1, 196609, 65532, 1, 196610, 65532, 1, 196611, 65532, 1, 196611, 65533, 1, 196610, 65533, 1, 196609, 65533, 1, 196608, 65533, 1, 262143, 65533, 1, 262142, 65533, 1, 262142, 65534, 1, 262143, 65534, 1, 196608, 65534, 1, 196609, 65534, 1, 196610, 65534, 1, 196611, 65534, 1, 196608, 5, 1, 262143, 5, 1, 262143, 6, 1, 196608, 6, 1, 196608, 7, 1, 262143, 7, 1, 262143, 9, 1, 262143, 8, 1, 196608, 8, 1, 196608, 10, 1, 196608, 9, 1, 262143, 10, 1, 196609, 4, 1, 65537, 5, 1, 65537, 6, 1, 65537, 7, 1, 65537, 8, 1, 65537, 9, 1, 65537, 10, 1, 65537, 11, 1, 131070, 11, 1, 131070, 10, 1, 131070, 9, 1, 131070, 8, 1, 131070, 7, 1, 131070, 6, 1, 131070, 5, 1, 196606, 5, 1, 196606, 6, 1, 196606, 7, 1, 196606, 8, 1, 196606, 9, 1, 196606, 10, 1, 196606, 11, 1, 131073, 11, 1, 131073, 10, 1, 131073, 9, 1, 131073, 8, 1, 131073, 7, 1, 131073, 6, 1, 131073, 5, 1, 262142, 11, 1, 262142, 10, 1, 262142, 9, 1, 262142, 8, 1, 262142, 7, 1, 262142, 6, 1, 262142, 5, 1, 196609, 11, 1, 196609, 10, 1, 196609, 9, 1, 196609, 8, 1, 196609, 7, 1, 196609, 6, 1, 196609, 5, 1, 196608, 11, 1, 262143, 11, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 3, 0)
 
 [node name="Props" type="Node3D" parent="Environment/Tutorial"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -122,14 +138,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, -1)
 [node name="Crate4" parent="Environment/Tutorial/Props" instance=ExtResource("7_hqsyx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
 
-[node name="GridMap" type="GridMap" parent="Environment/Tutorial"]
-mesh_library = ExtResource("2_cuoyg")
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(1, 0, 0, 1, 65535, 0, 0, 65535, 0, 0, 0, 0, 65535, 0, 0, 65535, 65535, 0, 65534, 65535, 0, 65534, 0, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 1, 65534, 0, 0, 65534, 0, 65535, 65534, 0, 65534, 65534, 0, 2, 1, 0, 2, 0, 0, 3, 0, 0, 3, 1, 0, 3, 65535, 0, 2, 65535, 0, 2, 65534, 0, 3, 65534, 0, 65533, 65534, 0, 65532, 65534, 0, 65532, 65535, 0, 65532, 0, 0, 65533, 65535, 0, 65533, 0, 0, 65533, 1, 0, 65532, 1, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 3, 65533, 0, 2, 65533, 0, 1, 65533, 0, 0, 65533, 0, 65535, 65533, 0, 65534, 65533, 0, 65533, 65533, 0, 65532, 65533, 0, 65532, 65532, 0, 65533, 65532, 0, 65534, 65532, 0, 65535, 65532, 0, 0, 65532, 0, 1, 65532, 0, 2, 65532, 0, 3, 65532, 0, 3, 3, 0, 2, 3, 0, 1, 3, 0, 0, 3, 0, 65534, 3, 0, 65533, 3, 0, 65532, 3, 0, 3, 4, 1, 2, 4, 1, 1, 4, 1, 65534, 4, 1, 65533, 4, 1, 65532, 4, 1, 65531, 4, 1, 65531, 3, 1, 65531, 2, 1, 65531, 1, 1, 65531, 65535, 1, 65531, 0, 1, 65531, 65534, 1, 65531, 65533, 1, 65531, 65532, 1, 65531, 65531, 1, 65532, 65531, 1, 65533, 65531, 1, 65534, 65531, 1, 65535, 65531, 1, 0, 65531, 1, 1, 65531, 1, 2, 65531, 1, 3, 65531, 1, 4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 4, 65534, 1, 4, 65535, 1, 4, 0, 1, 4, 1, 1, 4, 2, 1, 4, 3, 1, 4, 4, 1, 65535, 3, 0, 0, 4, 0, 65535, 4, 0, 65535, 5, 0, 0, 5, 0, 0, 6, 0, 65535, 6, 0, 65535, 7, 0, 0, 7, 0, 0, 8, 0, 65535, 8, 0, 65535, 9, 0, 0, 9, 0, 0, 10, 0, 65535, 10, 0, 65535, 11, 0, 0, 11, 0, 1, 5, 1, 1, 6, 1, 1, 7, 1, 1, 8, 1, 1, 9, 1, 1, 10, 1, 1, 11, 1, 65534, 5, 1, 65534, 6, 1, 65534, 7, 1, 65534, 8, 1, 65534, 9, 1, 65534, 10, 1, 65534, 11, 1, 65536, 65531, 1, 65537, 65531, 1, 65538, 65531, 1, 131071, 65531, 1, 131070, 65531, 1, 131069, 65531, 1, 131068, 65531, 1, 131067, 65531, 1, 131067, 65532, 1, 131067, 65533, 1, 131067, 65534, 1, 131067, 65535, 1, 131067, 0, 1, 131067, 1, 1, 131067, 2, 1, 131067, 3, 1, 131067, 4, 1, 131068, 4, 1, 131069, 4, 1, 131070, 4, 1, 65537, 4, 1, 65538, 4, 1, 65539, 4, 1, 65540, 4, 1, 65540, 3, 1, 65540, 2, 1, 65540, 1, 1, 65540, 0, 1, 65540, 65535, 1, 65540, 65534, 1, 65540, 65533, 1, 65540, 65532, 1, 65540, 65531, 1, 65539, 65531, 1, 131075, 65531, 1, 131074, 65531, 1, 131073, 65531, 1, 131072, 65531, 1, 196607, 65531, 1, 196606, 65531, 1, 196605, 65531, 1, 196604, 65531, 1, 196603, 65531, 1, 196603, 65532, 1, 196603, 65533, 1, 196603, 65534, 1, 196603, 65535, 1, 196603, 0, 1, 196603, 1, 1, 196603, 2, 1, 196603, 3, 1, 196603, 4, 1, 196604, 4, 1, 196605, 4, 1, 196606, 4, 1, 131073, 4, 1, 131074, 4, 1, 131075, 4, 1, 131076, 4, 1, 131076, 3, 1, 131076, 2, 1, 131076, 1, 1, 131076, 0, 1, 131076, 65535, 1, 131076, 65534, 1, 131076, 65533, 1, 131076, 65532, 1, 131076, 65531, 1, 196612, 4, 1, 196611, 4, 1, 196610, 4, 1, 196608, 4, 1, 262143, 4, 1, 262142, 4, 1, 262141, 4, 1, 262140, 4, 1, 262139, 4, 1, 262139, 3, 1, 262139, 2, 1, 262139, 1, 1, 262139, 0, 1, 262139, 65535, 1, 262139, 65534, 1, 262139, 65533, 1, 262139, 65532, 1, 262139, 65531, 1, 262140, 65531, 1, 262141, 65531, 1, 262142, 65531, 1, 262143, 65531, 1, 196608, 65531, 1, 196609, 65531, 1, 196610, 65531, 1, 196611, 65531, 1, 196612, 65531, 1, 196612, 65532, 1, 196612, 65533, 1, 196612, 65534, 1, 196612, 65535, 1, 196612, 0, 1, 196612, 1, 1, 196612, 2, 1, 196612, 3, 1, 196611, 3, 1, 196610, 3, 1, 196609, 3, 1, 196608, 3, 1, 262143, 3, 1, 262142, 3, 1, 262141, 3, 1, 262140, 3, 1, 262140, 2, 1, 262141, 2, 1, 262142, 2, 1, 262143, 2, 1, 196608, 2, 1, 196609, 2, 1, 196610, 2, 1, 196611, 2, 1, 196611, 1, 1, 196610, 1, 1, 196609, 1, 1, 196608, 1, 1, 262143, 1, 1, 262142, 1, 1, 262141, 1, 1, 262140, 0, 1, 262140, 65535, 1, 262141, 65535, 1, 262141, 0, 1, 262140, 1, 1, 262142, 0, 1, 262143, 0, 1, 196608, 0, 1, 196609, 0, 1, 196610, 0, 1, 196611, 0, 1, 196611, 65535, 1, 196610, 65535, 1, 196609, 65535, 1, 196608, 65535, 1, 262143, 65535, 1, 262142, 65535, 1, 262141, 65534, 1, 262141, 65533, 1, 262140, 65533, 1, 262140, 65534, 1, 262140, 65532, 1, 262141, 65532, 1, 262142, 65532, 1, 262143, 65532, 1, 196608, 65532, 1, 196609, 65532, 1, 196610, 65532, 1, 196611, 65532, 1, 196611, 65533, 1, 196610, 65533, 1, 196609, 65533, 1, 196608, 65533, 1, 262143, 65533, 1, 262142, 65533, 1, 262142, 65534, 1, 262143, 65534, 1, 196608, 65534, 1, 196609, 65534, 1, 196610, 65534, 1, 196611, 65534, 1, 196608, 5, 1, 262143, 5, 1, 262143, 6, 1, 196608, 6, 1, 196608, 7, 1, 262143, 7, 1, 262143, 9, 1, 262143, 8, 1, 196608, 8, 1, 196608, 10, 1, 196608, 9, 1, 262143, 10, 1, 196609, 4, 1, 65537, 5, 1, 65537, 6, 1, 65537, 7, 1, 65537, 8, 1, 65537, 9, 1, 65537, 10, 1, 65537, 11, 1, 131070, 11, 1, 131070, 10, 1, 131070, 9, 1, 131070, 8, 1, 131070, 7, 1, 131070, 6, 1, 131070, 5, 1, 196606, 5, 1, 196606, 6, 1, 196606, 7, 1, 196606, 8, 1, 196606, 9, 1, 196606, 10, 1, 196606, 11, 1, 131073, 11, 1, 131073, 10, 1, 131073, 9, 1, 131073, 8, 1, 131073, 7, 1, 131073, 6, 1, 131073, 5, 1, 262142, 11, 1, 262142, 10, 1, 262142, 9, 1, 262142, 8, 1, 262142, 7, 1, 262142, 6, 1, 262142, 5, 1, 196609, 11, 1, 196609, 10, 1, 196609, 9, 1, 196609, 8, 1, 196609, 7, 1, 196609, 6, 1, 196609, 5, 1, 196608, 11, 1, 262143, 11, 1)
-}
-metadata/_editor_floor_ = Vector3(0, 7, 0)
-
 [node name="Training" type="Node3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 30)
 
@@ -144,6 +152,10 @@ metadata/_editor_floor_ = Vector3(0, 4, 0)
 
 [node name="Props" type="Node3D" parent="Environment/Training"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="ExampleEnemy" parent="Environment/Training/Props" instance=ExtResource("2_ry3oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+health = SubResource("Resource_00acj")
 
 [node name="Stool" parent="Environment/Training/Props" instance=ExtResource("4_r2ehu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
@@ -187,19 +199,13 @@ transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 
 [node name="Arena" type="Node3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, 29)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environment/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, -29)
-navigation_mesh = SubResource("NavigationMesh_3xe5a")
-
-[node name="Floor" type="MeshInstance3D" parent="Environment/Arena/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, 29)
+[node name="Floor" type="MeshInstance3D" parent="Environment/Arena"]
 mesh = SubResource("PlaneMesh_iwnqm")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ifey0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/NavigationRegion3D/Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Arena/Floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/NavigationRegion3D/Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/Floor/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_jjrqy")
 
 [node name="Walls" type="Node3D" parent="Environment/Arena"]
@@ -259,6 +265,14 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 light_energy = 0.0
 light_bake_mode = 0
 
+[node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("1_x7sid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+health = SubResource("Resource_0vsm0")
+weapon = NodePath("CharacterBody3D/Camera3D/ExampleWeapon")
+
+[node name="ExampleWeapon" parent="Player/CharacterBody3D/Camera3D" index="0" instance=ExtResource("6_oabfv")]
+damage = SubResource("Resource_0djcg")
+
 [node name="LookInstruction" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 4.18346, -6)
 text = "Use the mouse or right joystick
@@ -283,11 +297,4 @@ text = "Right click or press Q or use
 the left trigger to use your tool."
 font_size = 100
 
-[node name="ExampleWeapon" parent="." instance=ExtResource("14_vk4dc")]
-
-[node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("15_7etpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-weapon = NodePath("../ExampleWeapon")
-
-[node name="BuffElf" parent="." instance=ExtResource("16_4jhrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6569, 1, 35.263)
+[editable path="Player"]
