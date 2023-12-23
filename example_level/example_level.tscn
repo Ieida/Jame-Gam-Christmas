@@ -15,8 +15,8 @@ background_mode = 2
 sky = SubResource("Sky_j3tm3")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_fqpug"]
-vertices = PackedVector3Array(-3.25, 0.5, 0.5, -0.75, 0.5, 0.5, -0.75, 0.5, 0.25, -9.5, 0.5, 2, -3.5, 0.5, 2, -3.25, 0.5, 0.5, -3.25, 0.5, 0.5, -0.75, 0.5, 0.25, -0.75, 0.5, -9.5, -3.25, 0.5, 0.5, -0.75, 0.5, -9.5, -9.5, 0.5, -9.5, -9.5, 0.5, 2, -0.75, 0.5, 0.25, 9.5, 0.5, 0.25, 9.5, 0.5, -9.5, -0.75, 0.5, -9.5, -0.75, 0.5, 0.25, -0.75, 0.5, 0.5, -0.25, 0.5, 0.75, 9.5, 0.5, 0.25, -0.75, 0.5, 3.75, -2, 0.5, 3.75, -2, 0.5, 9.5, -0.25, 0.5, 3.25, -0.75, 0.5, 3.75, -2, 0.5, 9.5, 9.5, 0.5, 9.5, 9.5, 0.5, 0.25, 9.5, 0.5, 0.25, -0.25, 0.5, 0.75, -0.25, 0.5, 3.25, -2.5, 2.5, 1.5, -2.5, 2.5, 2.5, -1.5, 2.5, 2.5, -1.5, 2.5, 1.5, -2.25, 0.5, 1.75, -2.25, 0.5, 2.5, -1.5, 0.5, 2.5, -1.5, 0.5, 1.75, -2, 0.5, 9.5, -2, 0.5, 3.75, -3.5, 0.5, 3.5, -3.5, 0.5, 3.5, -3.5, 0.5, 2, -9.5, 0.5, 2, -3.5, 0.5, 3.5, -9.5, 0.5, 2, -9.5, 0.5, 9.5, -2, 0.5, 9.5)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(16, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(23, 22, 21), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(27, 24, 28), PackedInt32Array(31, 30, 29), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(42, 41, 40), PackedInt32Array(45, 44, 43), PackedInt32Array(49, 48, 46), PackedInt32Array(46, 48, 47)]
+vertices = PackedVector3Array(-1.75, 0.5, -3.5, 0, 0.5, -3.75, 0, 0.5, -9.5, -9.5, 0.5, -2, -1.75, 0.5, -2, -1.75, 0.5, -3.5, -1.75, 0.5, -3.5, 0, 0.5, -9.5, -9.5, 0.5, -9.5, -9.5, 0.5, -2, 0, 0.5, -9.5, 0, 0.5, -3.75, 1.5, 0.5, -3.5, 1.5, 0.5, -3.5, 1.5, 0.5, -2, 9.5, 0.5, -2, 1.5, 0.5, -3.5, 9.5, 0.5, -2, 9.5, 0.5, -9.5, 0, 0.5, -9.5, -0.75, 2.5, -2.75, -0.75, 2.5, -1.5, 0.5, 2.5, -1.5, 0.5, 2.5, -2.75, -0.5, 0.5, -2.5, -0.5, 0.5, -1.75, 0.25, 0.5, -1.75, 0.25, 0.5, -2.5, -1.5, 0.5, -0.5, -1.75, 0.5, -2, -9.5, 0.5, -2, -9.5, 0.5, 9.5, 0, 0.5, 9.5, 0, 0.5, 9.5, 0, 0.5, -0.5, -1.5, 0.5, -0.5, 9.5, 0.5, -2, 1.5, 0.5, -2, 1.25, 0.5, -0.5, 0, 0.5, 9.5, 9.5, 0.5, 9.5, 1.25, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 9.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7), PackedInt32Array(12, 11, 10), PackedInt32Array(15, 14, 13), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(31, 28, 32), PackedInt32Array(35, 34, 33), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 40), PackedInt32Array(38, 40, 39), PackedInt32Array(43, 42, 41)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iowvg"]
 
@@ -59,7 +59,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_tx8ap")
 
 [node name="Box" type="MeshInstance3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0335512, 1, -2.24546)
 mesh = SubResource("BoxMesh_ttyku")
 skeleton = NodePath("../..")
 

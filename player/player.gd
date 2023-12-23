@@ -1,4 +1,5 @@
 extends Node3D
+class_name Player
 
 
 @export_category("Movement")
@@ -19,10 +20,9 @@ var look_input: Vector2 = Vector2.ZERO
 @export_category("Weapon")
 @export var weapon: Weapon
 
-
-var hitbox: Hitbox = null
-func get_hitbox() -> Hitbox:
-	return hitbox
+@onready var hitbox: Hitbox = $CharacterBody3D/Hitbox
+@onready var feet: Node3D = $CharacterBody3D/Feet
+@onready var eyes: Node3D = $CharacterBody3D/Eyes
 
 
 func _input(event):
@@ -35,9 +35,6 @@ func _ready():
 	$CharacterBody3D/Hitbox.health = health
 	health.applied_damage.connect(_on_health_applied_damage)
 	health.reached_zero.connect(_on_health_reached_zero)
-	
-	# Get references
-	hitbox = $CharacterBody3D/Hitbox
 	
 	# Capture mouse.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

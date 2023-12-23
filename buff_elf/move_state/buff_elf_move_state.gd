@@ -1,6 +1,7 @@
 extends State
 
 
+@export var animation_player: AnimationPlayer
 @export var navigation_agent: NavigationAgent3D
 @export var body: CharacterBody3D
 @export var speed: float = 2
@@ -10,14 +11,12 @@ extends State
 
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_DISABLED
 	NavigationServer3D.map_changed.connect(_on_navigation_map_changed)
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 
 
 func _on_navigation_map_changed(map: RID):
-	if map == navigation_agent.get_navigation_map():
-		process_mode = Node.PROCESS_MODE_INHERIT
+	pass
 
 
 func _physics_process(delta):
@@ -33,6 +32,9 @@ func _physics_process(delta):
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
+	if process_mode == Node.PROCESS_MODE_DISABLED:
+		return
+		
 	body.velocity = safe_velocity
 	body.move_and_slide()
 	
@@ -43,8 +45,9 @@ func _on_velocity_computed(safe_velocity: Vector3):
 func enable():
 	super.enable()
 	
+	animation_player.play("move")
 	while process_mode != Node.PROCESS_MODE_DISABLED:
-		set_movement_target(target.global_position)
+		set_movement_target(target.feet.global_position)
 		await get_tree().create_timer(0.5).timeout
 
 

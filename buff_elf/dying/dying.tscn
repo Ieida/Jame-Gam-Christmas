@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2n423vwfrk6h"]
+
+[ext_resource type="Script" path="res://buff_elf/dying/dying.gd" id="1_ahg1g"]
+
+[node name="Dying" type="Node"]
+script = ExtResource("1_ahg1g")

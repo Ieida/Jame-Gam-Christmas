@@ -34,5 +34,5 @@ func freeze():
 
 
 func unfreeze():
-	animation_player.queue("RESET")
+	animation_player.play_backwards("freeze")
 	print("unfreezing")
