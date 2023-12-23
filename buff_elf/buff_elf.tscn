@@ -323,10 +323,11 @@ body = NodePath("../../CharacterBody3D")
 target = NodePath("../../Target")
 charge_state = NodePath("../BuffElfChargeState")
 
-[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("navigation_agent", "body", "end_state", "hurtbox", "hitbox", "damage") instance=ExtResource("5_fs2u0")]
+[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "recover", "hurtbox", "hitbox", "damage") instance=ExtResource("5_fs2u0")]
+animation_player = NodePath("../../AnimationPlayer")
 navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
 body = NodePath("../../CharacterBody3D")
-end_state = NodePath("../ChargeRecover")
+recover = NodePath("../ChargeRecover")
 hurtbox = NodePath("../../CharacterBody3D/Hurtbox")
 hitbox = NodePath("../../CharacterBody3D/Hitbox")
 damage = NodePath("../../Damage")
