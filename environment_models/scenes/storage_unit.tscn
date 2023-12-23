@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbpcpd07hq37g"]
+[gd_scene load_steps=7 format=3 uid="uid://dbpcpd07hq37g"]
 
 [ext_resource type="PackedScene" uid="uid://cnpsj274tr5cy" path="res://environment_models/assets/SM_StorageUnit.glb" id="1_8tog8"]
 [ext_resource type="Texture2D" uid="uid://barm4h7pc5ys1" path="res://environment_models/textures/T_Wood.tga" id="2_4rvc7"]
+[ext_resource type="Texture2D" uid="uid://dy8l3nwvrirvo" path="res://environment_models/textures/T_Shelves.tga" id="2_x6aec"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubdyb"]
+albedo_texture = ExtResource("2_x6aec")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mg5mo"]
 albedo_texture = ExtResource("2_4rvc7")
 texture_filter = 0
 
@@ -16,6 +21,7 @@ size = Vector3(1.5, 1, 2)
 
 [node name="SM_StorageUnit" parent="SM_StorageUnit2/Node" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ubdyb")
+surface_material_override/1 = SubResource("StandardMaterial3D_mg5mo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
