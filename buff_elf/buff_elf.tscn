@@ -407,6 +407,8 @@ enabled = false
 target_position = Vector3(0, 0, 1)
 hit_back_faces = false
 
+[node name="Feet" type="Node3D" parent="CharacterBody3D"]
+
 [node name="SnowParticles" type="GPUParticles3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 visible = false
