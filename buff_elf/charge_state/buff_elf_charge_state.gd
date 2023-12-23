@@ -10,6 +10,8 @@ extends State
 @export var hitbox: Hitbox
 @export var damage: Damage
 @export var status_effect: PackedScene
+@export var footsteps: AudioStreamPlayer3D
+@export var hit_sfx: PackedScene
 
 
 func _ready():
@@ -37,9 +39,20 @@ func _on_hurtbox_area_entered(area: Area3D):
 		damage.apply(area.health)
 		var se = status_effect.instantiate()
 		area.status_effect_manager.add_effect(se)
+		
+		# Hit sound
+		var s = hit_sfx.instantiate()
+		s.global_transform = area.global_transform
+		get_tree().root.add_child(s)
 
 
 func enable():
 	super.enable()
 	
 	animation_player.play("charge")
+	footsteps.play()
+
+func disable():
+	super.disable()
+	
+	footsteps.stop()

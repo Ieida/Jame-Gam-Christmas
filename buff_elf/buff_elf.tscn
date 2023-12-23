@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://o6jaoucmn5uy"]
+[gd_scene load_steps=41 format=3 uid="uid://o6jaoucmn5uy"]
 
 [ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="1_c6ls8"]
 [ext_resource type="Script" path="res://buff_elf/buff_elf.gd" id="1_enntc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cujlvq1qf84da" path="res://buff_elf/charge_state/buff_elf_charge_state.tscn" id="5_fs2u0"]
 [ext_resource type="PackedScene" uid="uid://cmn0kx3l2odfr" path="res://status_effects/stun.tscn" id="6_u4gnr"]
 [ext_resource type="PackedScene" uid="uid://d2n423vwfrk6h" path="res://buff_elf/dying/dying.tscn" id="7_51q8a"]
+[ext_resource type="PackedScene" uid="uid://cwxj6cdg2vkgo" path="res://sfx/hit/hit.tscn" id="7_eu1v4"]
 [ext_resource type="PackedScene" uid="uid://ethxhwh58alj" path="res://buff_elf/hit/hit.tscn" id="7_k34rf"]
 [ext_resource type="Script" path="res://health/health.gd" id="8_pbpg6"]
 [ext_resource type="PackedScene" uid="uid://u7b356gbnalv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
@@ -19,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://goo8w71s4i1i" path="res://particle_effects/snowflake_texture.png" id="14_k6fyp"]
 [ext_resource type="Material" uid="uid://7w83g2uy6ptm" path="res://particle_effects/hit_particle_material.tres" id="15_f0d35"]
 [ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="16_8qd1h"]
+[ext_resource type="AudioStream" uid="uid://6p7q05ntcyqj" path="res://sfx/ko/ko1.wav" id="17_1jgeg"]
+[ext_resource type="AudioStream" uid="uid://csmeoak3five4" path="res://sfx/footsteps/footsteps1.wav" id="18_ddwxp"]
+[ext_resource type="AudioStream" uid="uid://drnkxrdlqrqcv" path="res://sfx/footsteps/footsteps2.wav" id="19_1xdsy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w0rm2"]
 height = 1.5
@@ -180,6 +184,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody3D/KO")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_6mshd"]
 resource_name = "hit"
@@ -316,14 +334,15 @@ raycast = NodePath("../../CharacterBody3D/RayCast3D")
 target = NodePath("../../Target")
 chase_state = NodePath("../BuffElfMoveState")
 
-[node name="BuffElfMoveState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "target", "charge_state") instance=ExtResource("4_frvta")]
+[node name="BuffElfMoveState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "target", "charge_state", "footsteps") instance=ExtResource("4_frvta")]
 animation_player = NodePath("../../AnimationPlayer")
 navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
 body = NodePath("../../CharacterBody3D")
 target = NodePath("../../Target")
 charge_state = NodePath("../BuffElfChargeState")
+footsteps = NodePath("../../CharacterBody3D/FootstepsWalk")
 
-[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "recover", "hurtbox", "hitbox", "damage") instance=ExtResource("5_fs2u0")]
+[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "recover", "hurtbox", "hitbox", "damage", "footsteps") instance=ExtResource("5_fs2u0")]
 animation_player = NodePath("../../AnimationPlayer")
 navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
 body = NodePath("../../CharacterBody3D")
@@ -332,6 +351,8 @@ hurtbox = NodePath("../../CharacterBody3D/Hurtbox")
 hitbox = NodePath("../../CharacterBody3D/Hitbox")
 damage = NodePath("../../Damage")
 status_effect = ExtResource("6_u4gnr")
+footsteps = NodePath("../../CharacterBody3D/FootstepsCharge")
+hit_sfx = ExtResource("7_eu1v4")
 
 [node name="ChargeRecover" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle")]
 script = ExtResource("9_pc16p")
@@ -405,6 +426,16 @@ one_shot = true
 explosiveness = 1.0
 process_material = ExtResource("15_f0d35")
 draw_pass_1 = SubResource("QuadMesh_fj4ot")
+
+[node name="KO" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+stream = ExtResource("17_1jgeg")
+
+[node name="FootstepsWalk" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+stream = ExtResource("18_ddwxp")
+
+[node name="FootstepsCharge" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+stream = ExtResource("19_1xdsy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -8,6 +8,7 @@ extends State
 @export var target: Node3D
 @export var charge_range = 10
 @export var charge_state: State
+@export var footsteps: AudioStreamPlayer3D
 
 
 func _ready():
@@ -46,9 +47,15 @@ func enable():
 	super.enable()
 	
 	animation_player.play("move")
+	footsteps.play()
 	while process_mode != Node.PROCESS_MODE_DISABLED:
 		set_movement_target(target.feet.global_position)
 		await get_tree().create_timer(0.5).timeout
+
+func disable():
+	super.disable()
+	
+	footsteps.stop()
 
 
 func set_movement_target(movement_target: Vector3):

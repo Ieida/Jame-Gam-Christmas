@@ -23,6 +23,7 @@ var look_input: Vector2 = Vector2.ZERO
 @onready var hitbox: Hitbox = $CharacterBody3D/Hitbox
 @onready var feet: Node3D = $CharacterBody3D/Feet
 @onready var eyes: Node3D = $CharacterBody3D/Eyes
+@onready var footsteps: AudioStreamPlayer3D = $CharacterBody3D/Feet/Footsteps
 
 
 func _input(event):
@@ -112,7 +113,12 @@ func move(delta: float):
 	var input_x = Input.get_axis("move_left", "move_right")
 	var input_z = Input.get_axis("move_forward", "move_backward")
 	var new_input_vector = (camera.global_basis.x * input_x + camera.global_basis.x.cross(controller.global_basis.y) * input_z).normalized()
-	if new_input_vector: input_vector = new_input_vector
+	if new_input_vector:
+		input_vector = new_input_vector
+		if not footsteps.playing:
+			footsteps.play()
+	elif footsteps.playing:
+		footsteps.stop()
 	
 	# Acceleration and deceleration.
 	var target_speed = base_speed if new_input_vector else 0.0
@@ -130,6 +136,7 @@ func stun():
 	$HUD/StatusEffectLabel.text = "STUNNED!"
 	$HUD/StatusEffectLabel.show()
 	print("player stunned")
+	if footsteps.playing: footsteps.stop()
 
 
 func unstun():
