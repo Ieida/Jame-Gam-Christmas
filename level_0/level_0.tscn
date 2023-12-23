@@ -82,6 +82,8 @@ metadata/_editor_floor_ = Vector3(0, 3, 0)
 [node name="Props" type="Node3D" parent="Environment/Tutorial"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
+[node name="WallDecor" type="Node3D" parent="Environment/Tutorial/Props"]
+
 [node name="Present" parent="Environment/Tutorial/Props" instance=ExtResource("4_libta")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
 
@@ -251,7 +253,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Doorway" parent="Environment/Arena" instance=ExtResource("8_soxg0")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, 1)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.95, 0, 1)
 
 [node name="Ceiling" type="Sprite3D" parent="Environment/Arena"]
 transform = Transform3D(43, 0, 0, 0, 43, 0, 0, 0, 43, 0, 20, 0)

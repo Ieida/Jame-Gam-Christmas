@@ -1,26 +1,27 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdp3cmqypy06o"]
 
 [ext_resource type="PackedScene" uid="uid://bigevsxaux2f2" path="res://environment_models/assets/SM_Shelves.glb" id="1_m2cqu"]
-[ext_resource type="Texture2D" uid="uid://dy8l3nwvrirvo" path="res://environment_models/Textures/T_Shelves.tga" id="2_qp37p"]
+[ext_resource type="Texture2D" uid="uid://dy8l3nwvrirvo" path="res://environment_models/textures/T_Shelves.tga" id="2_qp37p"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8uov"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebfd0"]
 albedo_texture = ExtResource("2_qp37p")
 texture_filter = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_y3kn1"]
-size = Vector3(1.25, 1, 0.5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkpec"]
+size = Vector3(1, 1.25, 0.5)
 
 [node name="Shelves" type="Node3D"]
 
 [node name="SM_Shelves2" parent="." instance=ExtResource("1_m2cqu")]
 
 [node name="SM_Shelves" parent="SM_Shelves2/Node" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_l8uov")
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 2, -2, 2)
+surface_material_override/0 = SubResource("StandardMaterial3D_ebfd0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SM_Shelves2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SM_Shelves2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.025)
-shape = SubResource("BoxShape3D_y3kn1")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_wkpec")
 
 [editable path="SM_Shelves2"]
