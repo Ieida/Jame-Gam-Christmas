@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=25 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
 [ext_resource type="PackedScene" uid="uid://cjrmhuera1k3r" path="res://environment_models/scenes/wall.tscn" id="2_lkmj8"]
@@ -10,22 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://bury0yctwewsf" path="res://environment_models/scenes/crate.tscn" id="7_hqsyx"]
 [ext_resource type="PackedScene" uid="uid://y4khr4g14j5a" path="res://environment_models/scenes/chair.tscn" id="8_ems1u"]
 [ext_resource type="PackedScene" uid="uid://2v1bhqwxlyfu" path="res://environment_models/scenes/doorway.tscn" id="8_soxg0"]
+[ext_resource type="PackedScene" uid="uid://3anor7mwhsdl" path="res://example_enemy/example_enemy.tscn" id="9_hkara"]
 [ext_resource type="PackedScene" uid="uid://prmixilaxtni" path="res://environment_models/scenes/cookie_window.tscn" id="12_gsbd7"]
 [ext_resource type="PackedScene" uid="uid://1vptvrgjs5u0" path="res://environment_models/scenes/ceiling_lamp.tscn" id="12_xif0b"]
 [ext_resource type="PackedScene" uid="uid://db5kaqx07of4d" path="res://environment_models/scenes/anvil.tscn" id="14_b2kkf"]
 [ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="14_vk4dc"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="15_7etpt"]
 [ext_resource type="PackedScene" uid="uid://o6jaoucmn5uy" path="res://buff_elf/buff_elf.tscn" id="16_4jhrc"]
-[ext_resource type="PackedScene" uid="uid://dxido0ehdirkj" path="res://spawner/spawner.tscn" id="16_tt5db"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d5dat"]
-
-[sub_resource type="Sky" id="Sky_dg2a0"]
-sky_material = SubResource("ProceduralSkyMaterial_d5dat")
-
-[sub_resource type="Environment" id="Environment_ur6hu"]
-background_mode = 2
-sky = SubResource("Sky_dg2a0")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_3xe5a"]
 vertices = PackedVector3Array(-43.5, 1.5, 15.5, -43.5, 1.5, 42.5, -16.5, 1.5, 42.5, -16.5, 1.5, 15.5)
@@ -55,15 +46,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7cmhy"]
-size = Vector3(1, 2.99316, 2.43945)
-
 [node name="Level0" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_ur6hu")
 
 [node name="Tutorial" type="Node3D" parent="Environment"]
 
@@ -188,6 +173,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, 5)
 [node name="Chair" parent="Environment/Training/Props" instance=ExtResource("8_ems1u")]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 5, 0, 3)
 
+[node name="ExampleEnemy" parent="Environment/Training/Props" instance=ExtResource("9_hkara")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
 [node name="Arena" type="Node3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, 29)
 
@@ -293,22 +281,5 @@ font_size = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 weapon = NodePath("../ExampleWeapon")
 
-[node name="Spawner" parent="." instance=ExtResource("16_tt5db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9545, 1, 37.1757)
-scene = ExtResource("16_4jhrc")
-
-[node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 3.0
-
-[node name="PlayerTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3944, 1, 29.8855)
-collision_layer = 0
-collision_mask = 32
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.996582, 0)
-shape = SubResource("BoxShape3D_7cmhy")
-
-[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="spawn"]
-[connection signal="body_entered" from="PlayerTrigger" to="Spawner/Timer" method="start" unbinds=1]
+[node name="BuffElf" parent="." instance=ExtResource("16_4jhrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6569, 1, 35.263)

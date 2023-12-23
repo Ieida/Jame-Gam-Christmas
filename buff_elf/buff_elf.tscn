@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://o6jaoucmn5uy"]
+[gd_scene load_steps=37 format=3 uid="uid://o6jaoucmn5uy"]
 
 [ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="1_c6ls8"]
 [ext_resource type="Script" path="res://buff_elf/buff_elf.gd" id="1_enntc"]
@@ -11,10 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://d2n423vwfrk6h" path="res://buff_elf/dying/dying.tscn" id="7_51q8a"]
 [ext_resource type="PackedScene" uid="uid://ethxhwh58alj" path="res://buff_elf/hit/hit.tscn" id="7_k34rf"]
 [ext_resource type="Script" path="res://health/health.gd" id="8_pbpg6"]
-[ext_resource type="PackedScene" uid="uid://u7b356gbnalv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
+[ext_resource type="PackedScene" uid="uid://dp8vcdaficwbv" path="res://hurtbox/hurtbox.tscn" id="8_sluol"]
 [ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="9_70sf5"]
 [ext_resource type="Script" path="res://buff_elf/charge_recover/charge_recover.gd" id="9_pc16p"]
 [ext_resource type="Script" path="res://damage/damage.gd" id="11_6jyt5"]
+[ext_resource type="Material" uid="uid://cj62fd03b7f2" path="res://particle_effects/snow_particle_material.tres" id="13_fmk77"]
+[ext_resource type="Texture2D" uid="uid://goo8w71s4i1i" path="res://particle_effects/snowflake_texture.png" id="14_k6fyp"]
+[ext_resource type="Material" uid="uid://7w83g2uy6ptm" path="res://particle_effects/hit_particle_material.tres" id="15_f0d35"]
+[ext_resource type="Texture2D" uid="uid://d0qfu4ggnwlwo" path="res://particle_effects/mint_texture.png" id="16_8qd1h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w0rm2"]
 height = 1.5
@@ -24,6 +28,31 @@ height = 1.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_do14i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ciy8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxqcu"]
+transparency = 1
+albedo_texture = ExtResource("14_k6fyp")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_hdd43"]
+material = SubResource("StandardMaterial3D_vxqcu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3y0vh"]
+transparency = 1
+albedo_texture = ExtResource("16_8qd1h")
+texture_filter = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_fj4ot"]
+material = SubResource("StandardMaterial3D_3y0vh")
 
 [sub_resource type="Animation" id="Animation_0jrtx"]
 length = 0.001
@@ -63,11 +92,24 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody3D/SnowParticles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_11vvq"]
 resource_name = "charge"
-length = 0.2
+length = 0.3
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -75,10 +117,22 @@ tracks/0/path = NodePath("CharacterBody3D/Sprite3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 1, 0), Vector3(0, 1.1, 0), Vector3(0, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Sprite3D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(7, 6, 6.25), Vector3(6.25, 6.25, 6.25), Vector3(7, 6, 6.25)]
 }
 
 [sub_resource type="Animation" id="Animation_dmted"]
@@ -134,17 +188,17 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CharacterBody3D/Sprite3D:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(6.25, 6.25, 6.25), Vector3(6.5, 6.5, 6.5), Vector3(6.25, 6.25, 6.25)]
+"values": [Vector3(6.25, 6.25, 6.25), Vector3(7, 6, 6.5), Vector3(6, 7, 6.5), Vector3(6.25, 6.25, 6.25)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("CharacterBody3D/Sprite3D:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -168,9 +222,47 @@ tracks/2/keys = {
 "method": &"end"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody3D/HitParticles")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CharacterBody3D/HitParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.01, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_g3bta"]
 resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_i5mvd"]
 resource_name = "move"
@@ -293,6 +385,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 enabled = false
 target_position = Vector3(0, 0, 1)
 hit_back_faces = false
+
+[node name="SnowParticles" type="GPUParticles3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+cast_shadow = 0
+gi_mode = 0
+amount = 50
+lifetime = 10.0
+process_material = ExtResource("13_fmk77")
+draw_pass_1 = SubResource("QuadMesh_hdd43")
+
+[node name="HitParticles" type="GPUParticles3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("15_f0d35")
+draw_pass_1 = SubResource("QuadMesh_fj4ot")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

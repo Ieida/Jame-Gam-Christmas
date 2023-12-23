@@ -2,16 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1flb4ssv67fp"
-path="res://.godot/imported/T_PhotosTrim1.tga-04e08cdefa518a04c9fc785ae6f73f04.ctex"
+uid="uid://38sjo7610tj0"
+path="res://.godot/imported/SM_StorageUnit_M_Shelvesbasecolortexture.png-45cc377587c7e3250279a5c6edbbdfba.ctex"
 metadata={
 "vram_texture": false
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://environment_models/textures/T_PhotosTrim1.tga"
-dest_files=["res://.godot/imported/T_PhotosTrim1.tga-04e08cdefa518a04c9fc785ae6f73f04.ctex"]
+source_file="res://environment_models/assets/SM_StorageUnit_M_Shelvesbasecolortexture.png"
+dest_files=["res://.godot/imported/SM_StorageUnit_M_Shelvesbasecolortexture.png-45cc377587c7e3250279a5c6edbbdfba.ctex"]
 
 [params]
 
