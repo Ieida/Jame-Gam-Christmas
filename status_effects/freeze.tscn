@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://sv2c26bn2hra"]
+
+[ext_resource type="Script" path="res://status_effects/freeze_status_effect.gd" id="1_1dha7"]
+
+[node name="Freeze" type="Node"]
+script = ExtResource("1_1dha7")
+duration = 2.0

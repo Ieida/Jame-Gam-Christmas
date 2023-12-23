@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="1_x7sid"]
-[ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
-[ext_resource type="Texture2D" path="res://character_textures/buff_elf.png" id="3_yxmwa"]
+[ext_resource type="MeshLibrary" uid="uid://cxsvjc0jgtpm3" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
+[ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="3_yxmwa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i7t6y"]
 

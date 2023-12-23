@@ -1,8 +1,9 @@
-extends StaticBody3D
+extends Area3D
 class_name Hitbox
 
 
 @export var health: Health
+@export var status_effect_manager: StatusEffectManager
 
 
 func disable():
@@ -11,7 +12,3 @@ func disable():
 
 func enable():
 	set_collision_layer_value(5, true)
-
-
-func take(damage: Damage):
-	health.apply(damage)

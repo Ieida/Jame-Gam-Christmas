@@ -91,7 +91,9 @@ attack={
 
 [layer_names]
 
+3d_physics/layer_1="Statics"
 3d_physics/layer_5="Hitboxes"
+3d_physics/layer_6="Controllers"
 
 [rendering]
 

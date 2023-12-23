@@ -20,26 +20,42 @@ var look_input: Vector2 = Vector2.ZERO
 @export var weapon: Weapon
 
 
+var hitbox: Hitbox = null
+func get_hitbox() -> Hitbox:
+	return hitbox
+
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		look_input += event.relative
 
 
 func _ready():
+	# Set up health.
+	$CharacterBody3D/Hitbox.health = health
+	health.applied_damage.connect(_on_health_applied_damage)
+	health.reached_zero.connect(_on_health_reached_zero)
+	
+	# Get references
+	hitbox = $CharacterBody3D/Hitbox
+	
 	# Capture mouse.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# Set up health.
-	$CharacterBody3D/Hitbox.health = health
+	hitbox.health = health
+	
+	# Set up weapon.
+	call_deferred("setup_weapon")
+
+
+func setup_weapon():
+	weapon.add_damage_exception_with($CharacterBody3D/Hitbox)
+	weapon.global_transform = camera.global_transform
+	weapon.reparent(camera)
 
 
 func _process(delta):
-	# Pause
-	if Input.is_action_just_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().paused = true
-		$PauseMenu.show()
-		
 	look(delta)
 	
 	# Attack.
@@ -53,6 +69,29 @@ func _physics_process(delta):
 		controller.velocity.y -= gravity * delta
 	
 	move(delta)
+
+
+func _on_health_applied_damage():
+	print("player applied damage")
+
+
+func _on_status_recieved(status: StatusEffect):
+	print("player recieved status effect")
+	status.apply(self)
+
+
+func _on_health_reached_zero():
+	print("player health reached zero")
+
+
+func replace_weapon(with: Weapon):
+	if weapon:
+		weapon.queue_free()
+	
+	weapon = with
+	weapon.add_damage_exception_with($CharacterBody3D/Hitbox)
+	weapon.global_transform = camera.global_transform
+	camera.add_child(weapon)
 
 
 func attack():
@@ -87,3 +126,16 @@ func move(delta: float):
 	movement.y = controller.velocity.y
 	controller.velocity = movement
 	controller.move_and_slide()
+
+
+func stun():
+	process_mode = Node.PROCESS_MODE_DISABLED
+	$HUD/StatusEffectLabel.text = "STUNNED!"
+	$HUD/StatusEffectLabel.show()
+	print("player stunned")
+
+
+func unstun():
+	print("player unstunned")
+	process_mode = Node.PROCESS_MODE_INHERIT
+	$HUD/StatusEffectLabel.hide()

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmn0kx3l2odfr"]
+
+[ext_resource type="Script" path="res://status_effects/stun_status_effect.gd" id="1_nfg7w"]
+
+[node name="Stun" type="Node"]
+script = ExtResource("1_nfg7w")
+duration = 1.0
