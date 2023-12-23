@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=26 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
 [ext_resource type="PackedScene" uid="uid://cjrmhuera1k3r" path="res://environment_models/scenes/wall.tscn" id="2_lkmj8"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://db5kaqx07of4d" path="res://environment_models/scenes/anvil.tscn" id="14_b2kkf"]
 [ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="14_vk4dc"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="15_7etpt"]
-[ext_resource type="PackedScene" uid="uid://o6jaoucmn5uy" path="res://buff_elf/buff_elf.tscn" id="16_4jhrc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d5dat"]
 
@@ -288,6 +287,3 @@ font_size = 100
 [node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("15_7etpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 weapon = NodePath("../ExampleWeapon")
-
-[node name="BuffElf" parent="." instance=ExtResource("16_4jhrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6569, 1, 35.263)
