@@ -1,6 +1,7 @@
 extends State
 
 
+@export var animation_player: AnimationPlayer
 @export var navigation_agent: NavigationAgent3D
 @export var body: CharacterBody3D
 @export var speed: float = 2
@@ -43,6 +44,7 @@ func _on_velocity_computed(safe_velocity: Vector3):
 func enable():
 	super.enable()
 	
+	animation_player.play("move")
 	while process_mode != Node.PROCESS_MODE_DISABLED:
 		set_movement_target(target.global_position)
 		await get_tree().create_timer(0.5).timeout

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://sv2c26bn2hra" path="res://status_effects/freeze.tscn" id="2_hqmm5"]
 [ext_resource type="Script" path="res://damage/damage.gd" id="2_sp02m"]
 [ext_resource type="Texture2D" uid="uid://dmkgsq08216e8" path="res://player/hand_texture.png" id="4_awad5"]
-[ext_resource type="PackedScene" uid="uid://dp8vcdaficwbv" path="res://hurtbox/hurtbox.tscn" id="4_hm5ea"]
+[ext_resource type="PackedScene" uid="uid://u7b356gbnalv" path="res://hurtbox/hurtbox.tscn" id="4_hm5ea"]
 
 [sub_resource type="Animation" id="Animation_h15hs"]
 length = 0.001
@@ -137,6 +137,9 @@ tracks/3/keys = {
 "values": [{
 "args": [],
 "method": &"swing_damage"
+}, {
+"args": [],
+"method": &"swing_end"
 }]
 }
 
@@ -180,4 +183,4 @@ shape = SubResource("CapsuleShape3D_tinbh")
 
 [node name="Damage" type="Node" parent="."]
 script = ExtResource("2_sp02m")
-amount = 1.0
+amount = 50.0

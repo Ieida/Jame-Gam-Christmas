@@ -1,11 +1,11 @@
 extends State
 
 
+@export var animation_player: AnimationPlayer
 @export var navigation_agent: NavigationAgent3D
 @export var body: CharacterBody3D
 @export var speed: float = 6
-@export var recover_time: float = 2
-@export var end_state: State
+@export var recover: State
 @export var hurtbox: Area3D
 @export var hitbox: Hitbox
 @export var damage: Damage
@@ -29,9 +29,9 @@ func _physics_process(delta):
 	body.move_and_slide()
 	
 	if speed * delta > distance:
+		print("recover")
 		process_mode = Node.PROCESS_MODE_DISABLED
-		await get_tree().create_timer(recover_time).timeout
-		state_machine.change_state(end_state)
+		state_machine.change_state(recover)
 
 
 func _on_hurtbox_area_entered(area: Area3D):
@@ -42,3 +42,9 @@ func _on_hurtbox_area_entered(area: Area3D):
 		damage.apply(area.health)
 		var se = status_effect.instantiate()
 		area.status_effect_manager.add_effect(se)
+
+
+func enable():
+	super.enable()
+	
+	animation_player.play("charge")

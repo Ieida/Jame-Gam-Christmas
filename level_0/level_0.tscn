@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=29 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
 [ext_resource type="PackedScene" uid="uid://cjrmhuera1k3r" path="res://environment_models/scenes/wall.tscn" id="2_lkmj8"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://db5kaqx07of4d" path="res://environment_models/scenes/anvil.tscn" id="14_b2kkf"]
 [ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="14_vk4dc"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="15_7etpt"]
+[ext_resource type="PackedScene" uid="uid://o6jaoucmn5uy" path="res://buff_elf/buff_elf.tscn" id="16_4jhrc"]
+[ext_resource type="PackedScene" uid="uid://dxido0ehdirkj" path="res://spawner/spawner.tscn" id="16_tt5db"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d5dat"]
 
@@ -52,6 +54,9 @@ gradient = SubResource("Gradient_c4bhi")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cmhy"]
+size = Vector3(1, 2.99316, 2.43945)
 
 [node name="Level0" type="Node3D"]
 
@@ -287,3 +292,23 @@ font_size = 100
 [node name="Player" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("15_7etpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 weapon = NodePath("../ExampleWeapon")
+
+[node name="Spawner" parent="." instance=ExtResource("16_tt5db")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9545, 1, 37.1757)
+scene = ExtResource("16_4jhrc")
+
+[node name="Timer" type="Timer" parent="Spawner"]
+wait_time = 3.0
+
+[node name="PlayerTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3944, 1, 29.8855)
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.996582, 0)
+shape = SubResource("BoxShape3D_7cmhy")
+
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="spawn"]
+[connection signal="body_entered" from="PlayerTrigger" to="Spawner/Timer" method="start" unbinds=1]
