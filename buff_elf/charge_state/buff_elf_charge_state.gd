@@ -13,9 +13,6 @@ extends State
 
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().physics_frame
-	process_mode = Node.PROCESS_MODE_INHERIT
 	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 
 
@@ -29,8 +26,6 @@ func _physics_process(delta):
 	body.move_and_slide()
 	
 	if speed * delta > distance:
-		print("recover")
-		process_mode = Node.PROCESS_MODE_DISABLED
 		state_machine.change_state(recover)
 
 

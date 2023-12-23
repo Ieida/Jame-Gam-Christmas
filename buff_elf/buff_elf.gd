@@ -19,7 +19,8 @@ func _on_died():
 
 
 func _on_health_applied_damage():
-	state_machine.change_state($StateMachine/Hit)
+	if health.amount > 0:
+		state_machine.change_state($StateMachine/Hit)
 
 
 func _on_health_reached_zero():

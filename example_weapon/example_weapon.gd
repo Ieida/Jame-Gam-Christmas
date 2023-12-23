@@ -23,7 +23,6 @@ func attack():
 
 
 func swing_damage():
-	print(hurtbox.get_overlapping_areas())
 	for area in hurtbox.get_overlapping_areas():
 		if area is Hitbox:
 			hit(area)

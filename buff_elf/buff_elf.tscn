@@ -77,6 +77,32 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(6.25, 6.25, 6.25), Vector3(6.5, 6.5, 6.5), Vector3(6.25, 6.25, 6.25)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Hit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_0jrtx"]
 length = 0.001
@@ -147,7 +173,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_dmted"]
 resource_name = "charge_recover"
-length = 5.0
 loop_mode = 1
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -156,7 +181,7 @@ tracks/0/path = NodePath("StateMachine/ChargeRecover")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -178,9 +203,9 @@ _data = {
 [sub_resource type="GDScript" id="GDScript_bj7mk"]
 script/source = "extends Node3D
 
-
-@onready var target: Hitbox = get_tree().get_nodes_in_group(\"players\")[0].get_hitbox()
-
+@onready var target: Node3D = get_tree().get_nodes_in_group(\"players\")[0]
+@onready var feet: Node3D = target.feet
+@onready var eyes: Node3D = target.eyes
 
 func _process(delta):
 	global_transform = target.global_transform
@@ -216,17 +241,18 @@ hitbox = NodePath("../../CharacterBody3D/Hitbox")
 damage = NodePath("../../Damage")
 status_effect = ExtResource("6_u4gnr")
 
-[node name="Hit" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle") instance=ExtResource("7_k34rf")]
-animation_player = NodePath("../../AnimationPlayer")
-idle = NodePath("../BuffElfIdleState")
-
-[node name="Dying" parent="StateMachine" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_51q8a")]
-animation_player = NodePath("../../AnimationPlayer")
-
 [node name="ChargeRecover" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle")]
 script = ExtResource("9_pc16p")
 animation_player = NodePath("../../AnimationPlayer")
 idle = NodePath("../BuffElfIdleState")
+
+[node name="Hit" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle", "health") instance=ExtResource("7_k34rf")]
+animation_player = NodePath("../../AnimationPlayer")
+idle = NodePath("../BuffElfIdleState")
+health = NodePath("../../Health")
+
+[node name="Dying" parent="StateMachine" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_51q8a")]
+animation_player = NodePath("../../AnimationPlayer")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_layer = 32
@@ -263,6 +289,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4ciy8")
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+enabled = false
+target_position = Vector3(0, 0, 1)
+hit_back_faces = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
