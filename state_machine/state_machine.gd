@@ -20,7 +20,6 @@ func change_state(state: State):
 		states.append(state)
 		state.state_machine = self
 	
-	print("from %s to %s" % [active_state, state])
 	active_state.disable()
 	active_state = state
 	active_state.enable()
