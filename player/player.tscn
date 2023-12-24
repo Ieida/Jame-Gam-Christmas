@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d4k0ibtmdvgiv"]
+[gd_scene load_steps=14 format=3 uid="uid://d4k0ibtmdvgiv"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_q2j2o"]
 [ext_resource type="Texture2D" uid="uid://gabbo6v5adiw" path="res://character_textures/gingerbread_man.png" id="2_hipd5"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://csmeoak3five4" path="res://sfx/footsteps/footsteps1.wav" id="4_2p031"]
 [ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="4_c7lv0"]
 [ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="5_avenk"]
+[ext_resource type="Script" path="res://candy/candy.gd" id="7_jqaq3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_en7sx"]
 
@@ -49,13 +50,14 @@ func _on_resume_pressed():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 "
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("health") groups=["players"]]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("health", "candy") groups=["players"]]
 script = ExtResource("1_q2j2o")
 base_speed = 7.0
 acceleration = 1.0
 deceleration = 0.95
 joystick_sensitivity = 80.0
 health = NodePath("Health")
+candy = NodePath("Candy")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 process_mode = 1
@@ -102,14 +104,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="CharacterBody3D/Feet"]
 stream = ExtResource("4_2p031")
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("2_l4nr7")
-amount = 100.0
-
-[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
-script = ExtResource("5_avenk")
-reciever = NodePath("..")
-
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -133,6 +127,28 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "*status effect*"
+
+[node name="CandyLabel" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0"
+autowrap_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="HUD/CandyLabel"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.498039)
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
@@ -175,3 +191,14 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Resume"
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_l4nr7")
+amount = 100.0
+
+[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
+script = ExtResource("5_avenk")
+reciever = NodePath("..")
+
+[node name="Candy" type="Node" parent="."]
+script = ExtResource("7_jqaq3")

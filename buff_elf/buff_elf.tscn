@@ -1,9 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://o6jaoucmn5uy"]
+[gd_scene load_steps=48 format=3 uid="uid://o6jaoucmn5uy"]
 
 [ext_resource type="Texture2D" uid="uid://dybhqs4oxlfbc" path="res://character_textures/buff_elf.png" id="1_c6ls8"]
 [ext_resource type="Script" path="res://buff_elf/buff_elf.gd" id="1_enntc"]
+[ext_resource type="Script" path="res://state/state.gd" id="3_cs58b"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_ugok7"]
-[ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="3_uqtox"]
 [ext_resource type="PackedScene" uid="uid://duvpd0ktew0m3" path="res://buff_elf/idle_state/buff_elf_idle_state.tscn" id="4_6uo0i"]
 [ext_resource type="PackedScene" uid="uid://bwjocllrkjgqx" path="res://buff_elf/move_state/buff_elf_move_state.tscn" id="4_frvta"]
 [ext_resource type="PackedScene" uid="uid://cujlvq1qf84da" path="res://buff_elf/charge_state/buff_elf_charge_state.tscn" id="5_fs2u0"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="9_70sf5"]
 [ext_resource type="Script" path="res://buff_elf/charge_recover/charge_recover.gd" id="9_pc16p"]
 [ext_resource type="Script" path="res://damage/damage.gd" id="11_6jyt5"]
+[ext_resource type="PackedScene" uid="uid://dy3kfvskx4ekb" path="res://candy_hitbox/candy_hitbox.tscn" id="12_xsi6l"]
 [ext_resource type="Material" uid="uid://cj62fd03b7f2" path="res://particle_effects/snow_particle_material.tres" id="13_fmk77"]
 [ext_resource type="Texture2D" uid="uid://goo8w71s4i1i" path="res://particle_effects/snowflake_texture.png" id="14_k6fyp"]
 [ext_resource type="Material" uid="uid://7w83g2uy6ptm" path="res://particle_effects/hit_particle_material.tres" id="15_f0d35"]
@@ -23,6 +24,27 @@
 [ext_resource type="AudioStream" uid="uid://6p7q05ntcyqj" path="res://sfx/ko/ko1.wav" id="17_1jgeg"]
 [ext_resource type="AudioStream" uid="uid://csmeoak3five4" path="res://sfx/footsteps/footsteps1.wav" id="18_ddwxp"]
 [ext_resource type="AudioStream" uid="uid://drnkxrdlqrqcv" path="res://sfx/footsteps/footsteps2.wav" id="19_1xdsy"]
+[ext_resource type="Script" path="res://candy/candy.gd" id="24_ysf51"]
+
+[sub_resource type="GDScript" id="GDScript_3cgg2"]
+resource_name = "stun"
+script/source = "extends State
+
+func enable():
+	super.enable()
+	
+	$\"../../StatusEffectAnimationPlayer\".play(\"stun\")
+"
+
+[sub_resource type="GDScript" id="GDScript_b82yn"]
+resource_name = "frozen"
+script/source = "extends State
+
+func enable():
+	super.enable()
+	
+	$\"../../StatusEffectAnimationPlayer\".play(\"freeze\")
+"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w0rm2"]
 height = 1.5
@@ -107,54 +129,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_11vvq"]
-resource_name = "charge"
-length = 0.3
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Sprite3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 1, 0), Vector3(0, 1.1, 0), Vector3(0, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Sprite3D:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(7, 6, 6.25), Vector3(6.25, 6.25, 6.25), Vector3(7, 6, 6.25)]
-}
-
-[sub_resource type="Animation" id="Animation_dmted"]
-resource_name = "charge_recover"
-loop_mode = 1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/ChargeRecover")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"end"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_bt1uq"]
@@ -299,7 +273,55 @@ tracks/0/keys = {
 "values": [Vector3(0, 1, 0), Vector3(0, 1.1, 0), Vector3(0, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bmko"]
+[sub_resource type="Animation" id="Animation_dmted"]
+resource_name = "charge_recover"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/ChargeRecover")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_11vvq"]
+resource_name = "charge"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(0, 1.1, 0), Vector3(0, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Sprite3D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(7, 6, 6.25), Vector3(6.25, 6.25, 6.25), Vector3(7, 6, 6.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oswng"]
 _data = {
 "RESET": SubResource("Animation_0jrtx"),
 "charge": SubResource("Animation_11vvq"),
@@ -308,6 +330,19 @@ _data = {
 "hit": SubResource("Animation_6mshd"),
 "idle": SubResource("Animation_g3bta"),
 "move": SubResource("Animation_i5mvd")
+}
+
+[sub_resource type="Animation" id="Animation_triny"]
+resource_name = "freeze"
+
+[sub_resource type="Animation" id="Animation_er8dq"]
+resource_name = "stun"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bmko"]
+_data = {
+"RESET": SubResource("Animation_0jrtx"),
+"freeze": SubResource("Animation_triny"),
+"stun": SubResource("Animation_er8dq")
 }
 
 [sub_resource type="GDScript" id="GDScript_bj7mk"]
@@ -328,27 +363,29 @@ script = ExtResource("1_enntc")
 script = ExtResource("3_ugok7")
 active_state = NodePath("BuffElfIdleState")
 
+[node name="Test" type="Node" parent="StateMachine"]
+script = ExtResource("3_cs58b")
+
 [node name="BuffElfIdleState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "raycast", "target", "chase_state") instance=ExtResource("4_6uo0i")]
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../CharacterAnimationPlayer")
 raycast = NodePath("../../CharacterBody3D/RayCast3D")
 target = NodePath("../../Target")
 chase_state = NodePath("../BuffElfMoveState")
 
 [node name="BuffElfMoveState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "target", "charge_state", "footsteps") instance=ExtResource("4_frvta")]
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../CharacterAnimationPlayer")
 navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
 body = NodePath("../../CharacterBody3D")
 target = NodePath("../../Target")
 charge_state = NodePath("../BuffElfChargeState")
 footsteps = NodePath("../../CharacterBody3D/FootstepsWalk")
 
-[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "recover", "hurtbox", "hitbox", "damage", "footsteps") instance=ExtResource("5_fs2u0")]
-animation_player = NodePath("../../AnimationPlayer")
+[node name="BuffElfChargeState" parent="StateMachine" node_paths=PackedStringArray("animation_player", "navigation_agent", "body", "recover", "hurtbox", "damage", "footsteps") instance=ExtResource("5_fs2u0")]
+animation_player = NodePath("../../CharacterAnimationPlayer")
 navigation_agent = NodePath("../../CharacterBody3D/NavigationAgent3D")
 body = NodePath("../../CharacterBody3D")
 recover = NodePath("../ChargeRecover")
 hurtbox = NodePath("../../CharacterBody3D/Hurtbox")
-hitbox = NodePath("../../CharacterBody3D/Hitbox")
 damage = NodePath("../../Damage")
 status_effect = ExtResource("6_u4gnr")
 footsteps = NodePath("../../CharacterBody3D/FootstepsCharge")
@@ -356,16 +393,22 @@ hit_sfx = ExtResource("7_eu1v4")
 
 [node name="ChargeRecover" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle")]
 script = ExtResource("9_pc16p")
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../CharacterAnimationPlayer")
 idle = NodePath("../BuffElfIdleState")
 
 [node name="Hit" parent="StateMachine" node_paths=PackedStringArray("animation_player", "idle", "health") instance=ExtResource("7_k34rf")]
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../CharacterAnimationPlayer")
 idle = NodePath("../BuffElfIdleState")
 health = NodePath("../../Health")
 
 [node name="Dying" parent="StateMachine" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_51q8a")]
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../CharacterAnimationPlayer")
+
+[node name="Stunned" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_3cgg2")
+
+[node name="Frozen" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_b82yn")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_layer = 32
@@ -387,12 +430,16 @@ billboard = 2
 texture_filter = 0
 texture = ExtResource("1_c6ls8")
 
-[node name="Hitbox" parent="CharacterBody3D" node_paths=PackedStringArray("health", "status_effect_manager") instance=ExtResource("3_uqtox")]
+[node name="CandyHitbox" parent="CharacterBody3D" node_paths=PackedStringArray("candy", "health", "status_effect_manager") instance=ExtResource("12_xsi6l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+candy = NodePath("../../Candy")
 health = NodePath("../../Health")
 status_effect_manager = NodePath("../../StatusEffectManager")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/CandyHitbox"]
 shape = SubResource("CapsuleShape3D_do14i")
 
 [node name="Hurtbox" parent="CharacterBody3D" instance=ExtResource("8_sluol")]
@@ -439,7 +486,12 @@ stream = ExtResource("18_ddwxp")
 [node name="FootstepsCharge" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 stream = ExtResource("19_1xdsy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CharacterAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oswng")
+}
+
+[node name="StatusEffectAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1bmko")
 }
@@ -457,4 +509,8 @@ reciever = NodePath("..")
 
 [node name="Damage" type="Node" parent="."]
 script = ExtResource("11_6jyt5")
+amount = 10.0
+
+[node name="Candy" type="Node" parent="."]
+script = ExtResource("24_ysf51")
 amount = 10.0
