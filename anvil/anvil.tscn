@@ -1,0 +1,56 @@
+[gd_scene load_steps=12 format=3 uid="uid://fqgc2jw3iavv"]
+
+[ext_resource type="PackedScene" uid="uid://dv75eo6xsu7l1" path="res://environment_models/assets/SM_Anvil.glb" id="1_hs4ey"]
+[ext_resource type="Script" path="res://anvil/anvil.gd" id="1_tjx0x"]
+[ext_resource type="Texture2D" uid="uid://257nusyu7ygo" path="res://environment_models/Textures/T_Anvil.tga" id="2_2vsbq"]
+[ext_resource type="Script" path="res://health/health.gd" id="4_7ncou"]
+[ext_resource type="PackedScene" uid="uid://g8s2alosytq2" path="res://anvil/anvil_hitbox.tscn" id="4_vl1q5"]
+[ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="5_ipy0l"]
+[ext_resource type="PackedScene" uid="uid://bwe2jnb6jrkeu" path="res://upgrade/upgrade.tscn" id="7_hlamy"]
+[ext_resource type="PackedScene" uid="uid://sv2c26bn2hra" path="res://status_effects/freeze.tscn" id="8_vo3nw"]
+[ext_resource type="PackedScene" uid="uid://cmn0kx3l2odfr" path="res://status_effects/stun.tscn" id="9_vn2o4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xviks"]
+albedo_texture = ExtResource("2_2vsbq")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lawak"]
+size = Vector3(2.3, 1.2, 0.9)
+
+[node name="Anvil" type="Node3D" node_paths=PackedStringArray("upgrades")]
+script = ExtResource("1_tjx0x")
+upgrades = [NodePath("Upgrades/Freeze"), NodePath("Upgrades/Stun")]
+
+[node name="SM_Anvil2" parent="." instance=ExtResource("1_hs4ey")]
+
+[node name="SM_Anvil" parent="SM_Anvil2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xviks")
+
+[node name="AnvilHitbox" parent="." node_paths=PackedStringArray("anvil", "health", "status_effect_manager") instance=ExtResource("4_vl1q5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+anvil = NodePath("..")
+health = NodePath("../Health")
+status_effect_manager = NodePath("../StatusEffectManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnvilHitbox"]
+shape = SubResource("BoxShape3D_lawak")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_7ncou")
+is_infinite = true
+
+[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
+script = ExtResource("5_ipy0l")
+reciever = NodePath("..")
+
+[node name="Upgrades" type="Node" parent="."]
+
+[node name="Freeze" parent="Upgrades" instance=ExtResource("7_hlamy")]
+price = 10.0
+item = ExtResource("8_vo3nw")
+
+[node name="Stun" parent="Upgrades" instance=ExtResource("7_hlamy")]
+price = 10.0
+item = ExtResource("9_vn2o4")
+
+[editable path="SM_Anvil2"]

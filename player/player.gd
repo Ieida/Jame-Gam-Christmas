@@ -19,6 +19,7 @@ var look_input: Vector2 = Vector2.ZERO
 @export var health: Health
 @export_category("Weapon")
 @export var weapon: Weapon
+@export var candy: Candy
 
 @onready var hitbox: Hitbox = $CharacterBody3D/Hitbox
 @onready var feet: Node3D = $CharacterBody3D/Feet
@@ -45,12 +46,16 @@ func _ready():
 	
 	# Set up weapon.
 	call_deferred("setup_weapon")
+	
+	# Set up HUD.
+	candy.amount_changed.connect(_on_candy_amount_changed)
 
 
 func setup_weapon():
 	weapon.add_damage_exception_with($CharacterBody3D/Hitbox)
 	weapon.global_transform = camera.global_transform
 	weapon.reparent(camera)
+	weapon.hit_hitbox.connect(_on_weapon_hit_hitbox)
 
 
 func _process(delta):
@@ -69,6 +74,10 @@ func _physics_process(delta):
 	move(delta)
 
 
+func _on_candy_amount_changed(new_amount: float):
+	$HUD/CandyLabel.text = "CANDY: %s" % new_amount
+
+
 func _on_health_applied_damage():
 	print("player applied damage")
 
@@ -82,6 +91,15 @@ func _on_health_reached_zero():
 	print("player health reached zero")
 
 
+func _on_weapon_hit_hitbox(hitbox: Hitbox):
+	if hitbox is AnvilHitbox:
+		var st_ef = hitbox.anvil.buy(candy)
+		if st_ef:
+			weapon.add_status_effect(st_ef)
+	elif hitbox is CandyHitbox:
+		hitbox.candy.stick_to(candy)
+
+
 func replace_weapon(with: Weapon):
 	if weapon:
 		weapon.queue_free()
@@ -90,6 +108,7 @@ func replace_weapon(with: Weapon):
 	weapon.add_damage_exception_with($CharacterBody3D/Hitbox)
 	weapon.global_transform = camera.global_transform
 	camera.add_child(weapon)
+	weapon.hit_hitbox.connect(_on_weapon_hit_hitbox)
 
 
 func attack():
