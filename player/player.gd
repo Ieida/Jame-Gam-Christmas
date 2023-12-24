@@ -89,6 +89,8 @@ func _on_status_recieved(status: StatusEffect):
 
 func _on_health_reached_zero():
 	print("player health reached zero")
+	get_tree().paused = true
+	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
 
 
 func _on_weapon_hit_hitbox(hitbox: Hitbox):

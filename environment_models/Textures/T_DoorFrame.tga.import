@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dw6vgge2ayrdl"
-path="res://.godot/imported/T_DoorFrame.tga-2112617e938910766ffd077632c7b642.ctex"
+path="res://.godot/imported/T_DoorFrame.tga-700d27d19eb97d12ee90b4599f26b889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment_models/textures/T_DoorFrame.tga"
-dest_files=["res://.godot/imported/T_DoorFrame.tga-2112617e938910766ffd077632c7b642.ctex"]
+source_file="res://environment_models/Textures/T_DoorFrame.tga"
+dest_files=["res://.godot/imported/T_DoorFrame.tga-700d27d19eb97d12ee90b4599f26b889.ctex"]
 
 [params]
 

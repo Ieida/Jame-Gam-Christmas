@@ -32,7 +32,7 @@ func _physics_process(delta):
 
 
 func _on_hurtbox_area_entered(area: Area3D):
-	if area == hitbox or process_mode == PROCESS_MODE_DISABLED:
+	if area == hitbox or process_mode == PROCESS_MODE_DISABLED or not get_tree():
 		return
 		
 	if area is Hitbox:

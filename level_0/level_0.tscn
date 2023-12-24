@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cowy8d86acwl3"]
+[gd_scene load_steps=27 format=3 uid="uid://cowy8d86acwl3"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpabysachh3nl" path="res://environment_models/blockout_tileset.tres" id="2_cuoyg"]
 [ext_resource type="PackedScene" uid="uid://cjrmhuera1k3r" path="res://environment_models/scenes/wall.tscn" id="2_lkmj8"]
@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dxido0ehdirkj" path="res://spawner/spawner.tscn" id="10_kvyvv"]
 [ext_resource type="PackedScene" uid="uid://prmixilaxtni" path="res://environment_models/scenes/cookie_window.tscn" id="12_gsbd7"]
 [ext_resource type="PackedScene" uid="uid://1vptvrgjs5u0" path="res://environment_models/scenes/ceiling_lamp.tscn" id="12_xif0b"]
-[ext_resource type="PackedScene" uid="uid://db5kaqx07of4d" path="res://environment_models/scenes/anvil.tscn" id="14_b2kkf"]
 [ext_resource type="PackedScene" uid="uid://bm3u2khgye7po" path="res://example_weapon/example_weapon.tscn" id="14_vk4dc"]
 [ext_resource type="PackedScene" uid="uid://d4k0ibtmdvgiv" path="res://player/player.tscn" id="15_7etpt"]
+[ext_resource type="PackedScene" uid="uid://fqgc2jw3iavv" path="res://anvil/anvil.tscn" id="15_g2vme"]
 [ext_resource type="PackedScene" uid="uid://o6jaoucmn5uy" path="res://buff_elf/buff_elf.tscn" id="16_4jhrc"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_3xe5a"]
@@ -46,6 +46,9 @@ gradient = SubResource("Gradient_c4bhi")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxx18"]
+size = Vector3(1, 3.1, 2.4)
 
 [node name="Level0" type="Node3D"]
 
@@ -183,12 +186,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, 29)
 [node name="Enemies" type="Node3D" parent="Environment/Arena"]
 
 [node name="Spawner" parent="Environment/Arena/Enemies" instance=ExtResource("10_kvyvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 scene = ExtResource("16_4jhrc")
 
 [node name="Timer" type="Timer" parent="Environment/Arena/Enemies/Spawner"]
 wait_time = 4.0
-one_shot = true
-autostart = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environment/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, -29)
@@ -246,7 +248,7 @@ transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 13.99,
 [node name="CeilingLamp" parent="Environment/Arena/Props/Hanging" instance=ExtResource("12_xif0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
-[node name="Anvil" parent="Environment/Arena/Props" instance=ExtResource("14_b2kkf")]
+[node name="Anvil" parent="Environment/Arena/Props" instance=ExtResource("15_g2vme")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Doorway" parent="Environment/Arena" instance=ExtResource("8_soxg0")]
@@ -256,6 +258,16 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.95,
 transform = Transform3D(43, 0, 0, 0, 43, 0, 0, 0, 43, 0, 20, 0)
 axis = 1
 texture = SubResource("GradientTexture2D_hpof7")
+
+[node name="EnterTrigger" type="Area3D" parent="Environment/Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 1)
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Arena/EnterTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200001, 1.55, 0)
+shape = SubResource("BoxShape3D_wxx18")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
@@ -293,3 +305,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 weapon = NodePath("../ExampleWeapon")
 
 [connection signal="timeout" from="Environment/Arena/Enemies/Spawner/Timer" to="Environment/Arena/Enemies/Spawner" method="spawn"]
+[connection signal="body_entered" from="Environment/Arena/EnterTrigger" to="Environment/Arena/Enemies/Spawner/Timer" method="start" flags=6 unbinds=1]
