@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://g8s2alosytq2"]
+
+[ext_resource type="Script" path="res://anvil/anvil_hitbox.gd" id="1_eq5h6"]
+
+[node name="AnvilHitbox" type="Area3D"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_eq5h6")

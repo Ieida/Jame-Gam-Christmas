@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crw6rmivx3oim"]
+
+[ext_resource type="Script" path="res://candy/candy.gd" id="1_t56kp"]
+
+[node name="Candy" type="Node"]
+script = ExtResource("1_t56kp")

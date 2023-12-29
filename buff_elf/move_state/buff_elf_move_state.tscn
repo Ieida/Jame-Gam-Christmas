@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwjocllrkjgqx"]
+
+[ext_resource type="Script" path="res://buff_elf/move_state/buff_elf_move_state.gd" id="1_fvsqb"]
+
+[node name="BuffElfMoveState" type="Node"]
+script = ExtResource("1_fvsqb")

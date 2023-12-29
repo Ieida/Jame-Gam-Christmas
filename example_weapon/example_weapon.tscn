@@ -1,0 +1,206 @@
+[gd_scene load_steps=13 format=3 uid="uid://bm3u2khgye7po"]
+
+[ext_resource type="Script" path="res://example_weapon/example_weapon.gd" id="1_7rx40"]
+[ext_resource type="PackedScene" uid="uid://cwxj6cdg2vkgo" path="res://sfx/hit/hit.tscn" id="2_5bcwk"]
+[ext_resource type="PackedScene" uid="uid://sv2c26bn2hra" path="res://status_effects/freeze.tscn" id="2_hqmm5"]
+[ext_resource type="Script" path="res://damage/damage.gd" id="2_sp02m"]
+[ext_resource type="Texture2D" uid="uid://dmkgsq08216e8" path="res://player/hand_texture.png" id="4_awad5"]
+[ext_resource type="PackedScene" uid="uid://u7b356gbnalv" path="res://hurtbox/hurtbox.tscn" id="4_hm5ea"]
+[ext_resource type="AudioStream" uid="uid://48ox7na1sved" path="res://sfx/slash1.wav" id="6_x7lqq"]
+
+[sub_resource type="Animation" id="Animation_h15hs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.11, -0.11, -0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vptgy"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 0.9, 1.1, 1.5, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.11, -0.11, -0.13), Vector3(0.11, -0.1, -0.13), Vector3(0.11, -0.11, -0.13), Vector3(0.11, -0.11, -0.13), Vector3(0.11, -0.1, -0.13), Vector3(0.11, -0.11, -0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3uayf"]
+resource_name = "swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.11, -0.11, -0.13), Vector3(0.02, -0.075, -0.175), Vector3(0.11, -0.11, -0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.825, 0.825, 0.825), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.244346, 0.610865), Vector3(0, 0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"swing_damage"
+}, {
+"args": [],
+"method": &"swing_end"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_euolw"]
+_data = {
+"RESET": SubResource("Animation_h15hs"),
+"idle": SubResource("Animation_vptgy"),
+"swing": SubResource("Animation_3uayf")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tinbh"]
+radius = 0.75
+
+[node name="ExampleWeapon" type="Node3D" node_paths=PackedStringArray("damage", "hurtbox")]
+script = ExtResource("1_7rx40")
+damage = NodePath("Damage")
+status_effect = ExtResource("2_hqmm5")
+hurtbox = NodePath("Hurtbox")
+hit_sfx = ExtResource("2_5bcwk")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.11, -0.13)
+sorting_offset = 2.0
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("4_awad5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_euolw")
+}
+autoplay = "idle"
+
+[node name="AnimationOnly(leave off)" type="Camera3D" parent="."]
+visible = false
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_hm5ea")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
+shape = SubResource("CapsuleShape3D_tinbh")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("2_sp02m")
+amount = 20.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_x7lqq")

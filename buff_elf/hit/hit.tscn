@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ethxhwh58alj"]
+
+[ext_resource type="Script" path="res://buff_elf/hit/hit.gd" id="1_ux826"]
+
+[node name="Hit" type="Node"]
+script = ExtResource("1_ux826")

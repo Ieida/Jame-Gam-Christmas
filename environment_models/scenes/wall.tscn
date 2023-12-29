@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjrmhuera1k3r"]
+
+[ext_resource type="PackedScene" uid="uid://bnoopgx25aoq" path="res://environment_models/assets/SM_Wall.glb" id="1_m7wai"]
+[ext_resource type="Texture2D" uid="uid://dow82cogfw4lv" path="res://environment_models/textures/T_TileWall.tga" id="2_7ocxt"]
+[ext_resource type="Texture2D" uid="uid://bom1xtdlqvo4k" path="res://environment_models/assets/SM_Wall_M_Woodbasecolortexture.png" id="3_hu6sm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl3bj"]
+albedo_texture = ExtResource("2_7ocxt")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dq0sn"]
+albedo_texture = ExtResource("3_hu6sm")
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uiigg"]
+points = PackedVector3Array(2799.73, -187.5, 9600, 2799.73, -200, 9600, 2799.73, -187.5, 0, 0, -187.501, 9600, 0, -200, 9600, 2799.73, -200, 0, 0, -187.501, 0, 0, -200, 0)
+
+[node name="Wall" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SM_Wall2" parent="." instance=ExtResource("1_m7wai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75, 0, 0)
+
+[node name="SM_Wall" parent="SM_Wall2/Node" index="0"]
+transform = Transform3D(-0.01, -8.74228e-10, 0, 8.74228e-10, -0.01, 0, 0, 0, 0.01, 38, -4, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_sl3bj")
+surface_material_override/1 = SubResource("StandardMaterial3D_dq0sn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.005, 0, 0, 0, 0, 0.005, 0, -0.005, 0, -7, 0, -1)
+shape = SubResource("ConvexPolygonShape3D_uiigg")
+
+[editable path="SM_Wall2"]

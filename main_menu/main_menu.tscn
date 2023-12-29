@@ -1,4 +1,82 @@
-[gd_scene format=3 uid="uid://duhhdrvqcklnp"]
+[gd_scene load_steps=7 format=3 uid="uid://duhhdrvqcklnp"]
+
+[ext_resource type="PackedScene" uid="uid://cowy8d86acwl3" path="res://level_0/level_0.tscn" id="1_xpn58"]
+
+[sub_resource type="GDScript" id="GDScript_yfv2d"]
+resource_name = "play_example"
+script/source = "extends Button
+
+
+var example_scene := preload(\"res://example_level/example_level.tscn\")
+
+
+func _ready():
+	if not OS.is_debug_build():
+		hide()
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+	get_tree().change_scene_to_packed(example_scene)
+"
+
+[sub_resource type="GDScript" id="GDScript_tdkxw"]
+resource_name = "play"
+script/source = "extends Button
+
+
+@export var scene: PackedScene
+
+
+func _ready():
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+	get_tree().change_scene_to_packed(scene)
+"
+
+[sub_resource type="GDScript" id="GDScript_inl8u"]
+resource_name = "settings"
+script/source = "extends Button
+
+
+func _ready():
+	$\"../../Settings\".hide()
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+	$\"..\".hide()
+	$\"../../Settings\".show()
+"
+
+[sub_resource type="GDScript" id="GDScript_vnps6"]
+resource_name = "quit"
+script/source = "extends Button
+
+
+func _ready():
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id="GDScript_i6rdu"]
+resource_name = "back"
+script/source = "extends Button
+
+
+func _ready():
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+	$\"..\".hide()
+	$\"../../Main\".show()
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +85,100 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayExample" type="Button" parent="Main"]
+layout_mode = 0
+offset_right = 111.0
+offset_bottom = 31.0
+text = "Play Example"
+script = SubResource("GDScript_yfv2d")
+
+[node name="Play" type="Button" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -47.5
+offset_right = 20.5
+offset_bottom = -16.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+script = SubResource("GDScript_tdkxw")
+scene = ExtResource("1_xpn58")
+
+[node name="Settings2" type="Button" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -15.5
+offset_right = 35.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+script = SubResource("GDScript_inl8u")
+
+[node name="Quit" type="Button" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = 16.0
+offset_right = 21.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+script = SubResource("GDScript_vnps6")
+
+[node name="Settings" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+script = SubResource("GDScript_i6rdu")

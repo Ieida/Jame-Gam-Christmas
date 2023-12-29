@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://j3dihbo04ugd"]
+
+[ext_resource type="PackedScene" uid="uid://cxb5xtthobr1l" path="res://environment_models/assets/SM_Pillar.glb" id="1_yl4oc"]
+[ext_resource type="Texture2D" uid="uid://cl8a7tpapattc" path="res://environment_models/textures/T_Pillar.tga" id="2_ufd41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlh0a"]
+albedo_texture = ExtResource("2_ufd41")
+texture_filter = 0
+
+[node name="Pillar" type="Node3D"]
+
+[node name="SM_Pillar2" parent="." instance=ExtResource("1_yl4oc")]
+
+[node name="SM_Pillar" parent="SM_Pillar2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nlh0a")
+
+[editable path="SM_Pillar2"]

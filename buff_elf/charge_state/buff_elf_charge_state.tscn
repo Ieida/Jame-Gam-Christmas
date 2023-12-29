@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cujlvq1qf84da"]
+
+[ext_resource type="Script" path="res://buff_elf/charge_state/buff_elf_charge_state.gd" id="1_0ro12"]
+
+[node name="BuffElfChargeState" type="Node"]
+script = ExtResource("1_0ro12")

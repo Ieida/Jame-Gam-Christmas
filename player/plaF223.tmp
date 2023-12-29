@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://d4k0ibtmdvgiv"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_q2j2o"]
+[ext_resource type="Texture2D" uid="uid://gabbo6v5adiw" path="res://character_textures/gingerbread_man.png" id="2_hipd5"]
+[ext_resource type="Script" path="res://health/health.gd" id="2_l4nr7"]
+[ext_resource type="PackedScene" uid="uid://ca1uj3p5k7x4t" path="res://hitbox/hitbox.tscn" id="4_c7lv0"]
+[ext_resource type="Script" path="res://status_effects/status_effect_manager.gd" id="5_avenk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_en7sx"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dfvus"]
+length = 1.5
+
+[sub_resource type="Environment" id="Environment_7xry2"]
+background_mode = 1
+background_color = Color(0.160784, 0.0117647, 0.113725, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.85098, 0.627451, 1)
+ambient_light_energy = 0.4
+fog_enabled = true
+fog_light_color = Color(0.160784, 0.0117647, 0.113725, 1)
+fog_density = 0.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1y8yc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xqiq2"]
+
+[sub_resource type="GDScript" id="GDScript_0lof4"]
+resource_name = "pause_menu"
+script/source = "extends Control
+
+
+func _ready():
+	hide()
+
+
+func _on_resume_pressed():
+	get_tree().paused = false
+	hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+"
+
+[node name="Player" type="Node3D" groups=["players"]]
+script = ExtResource("1_q2j2o")
+base_speed = 13.0
+acceleration = 0.7
+deceleration = 0.95
+joystick_sensitivity = 80.0
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 32
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+pixel_size = 0.0625
+texture_filter = 0
+texture = ExtResource("2_hipd5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_en7sx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("SeparationRayShape3D_dfvus")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+environment = SubResource("Environment_7xry2")
+attributes = SubResource("CameraAttributesPractical_1y8yc")
+
+[node name="Hitbox" parent="CharacterBody3D" instance=ExtResource("4_c7lv0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xqiq2")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_l4nr7")
+amount = 100.0
+
+[node name="StatusEffectManager" type="Node" parent="." node_paths=PackedStringArray("reciever")]
+script = ExtResource("5_avenk")
+reciever = NodePath("..")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="Control" parent="."]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_0lof4")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Resume" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -15.5
+offset_right = 35.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[connection signal="pressed" from="PauseMenu/Resume" to="PauseMenu" method="_on_resume_pressed"]

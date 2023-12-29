@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://2v1bhqwxlyfu"]
+
+[ext_resource type="PackedScene" uid="uid://jbvjvrtoew7w" path="res://environment_models/assets/SM_Doorway.glb" id="1_dyp8a"]
+[ext_resource type="Texture2D" uid="uid://dow82cogfw4lv" path="res://environment_models/textures/T_TileWall.tga" id="2_n2mw6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfl0s"]
+albedo_texture = ExtResource("2_n2mw6")
+texture_filter = 0
+
+[node name="Doorway" type="Node3D"]
+
+[node name="SM_Doorway2" parent="." instance=ExtResource("1_dyp8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="SM_Doorway" parent="SM_Doorway2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nfl0s")
+
+[editable path="SM_Doorway2"]

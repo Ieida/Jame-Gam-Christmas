@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://mvj31tum2puy"]
+
+[ext_resource type="PackedScene" uid="uid://bjybyuiwhm2ud" path="res://environment_models/assets/SM_Present.glb" id="1_aamgb"]
+[ext_resource type="Texture2D" uid="uid://btreqxclfwns6" path="res://environment_models/textures/T_Presents.tga" id="2_w8wh4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v350c"]
+cull_mode = 2
+albedo_texture = ExtResource("2_w8wh4")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tx421"]
+size = Vector3(2, 2, 2)
+
+[node name="Present" type="Node3D"]
+
+[node name="SM_Present2" parent="." instance=ExtResource("1_aamgb")]
+
+[node name="Node" parent="SM_Present2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 4.76837e-07, 0, 0)
+
+[node name="SM_Present" parent="SM_Present2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_v350c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_tx421")
+
+[editable path="SM_Present2"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://sonvitrt5fk"]
+
+[ext_resource type="PackedScene" uid="uid://clh3sbw12l1i6" path="res://environment_models/assets/SM_RandomPlank.glb" id="1_icya5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypq2p"]
+albedo_color = Color(0.737255, 0.443137, 0.113725, 1)
+texture_filter = 0
+
+[node name="Plank" type="Node3D"]
+
+[node name="SM_RandomPlank2" parent="." instance=ExtResource("1_icya5")]
+
+[node name="SM_RandomPlank" parent="SM_RandomPlank2/Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ypq2p")
+
+[editable path="SM_RandomPlank2"]
