@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var health := $Health
-@onready var animation_player := $AnimationPlayer
 @onready var state_machine := $StateMachine
 
 func _ready():
